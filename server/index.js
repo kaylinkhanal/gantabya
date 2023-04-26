@@ -1,6 +1,8 @@
-console.log("test")
-console.log("hi")
-
-function test() {
-  return "Hello";
-}
+const express = require('express')
+const app = express()
+ 
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+ 
+app.listen(3001)
