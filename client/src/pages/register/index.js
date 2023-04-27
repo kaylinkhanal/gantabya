@@ -7,6 +7,7 @@ const Register = () => {
             <input placeholder="Full Name" />
             <input placeholder="Mobile Number" />
             <input placeholder="password"/>
+            <input placeholder="role"/>
             <button>Register</button>
         </div>
     )
