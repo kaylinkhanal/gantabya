@@ -2,6 +2,8 @@ const express = require('express')
 //
 const mongoose = require('mongoose');
 const cors = require('cors')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const app = express()
 const port = 4000
 app.use(cors())
@@ -34,16 +36,10 @@ app.use(express.json())
 
 
 app.post('/register', async(req, res) => {
-try{
-  const data=  await Users.create(req.body)
-  if(data){
-    res.json({msg: "user has been registered"})
-  }
-
-  
-}catch(err){
-  console.log(err)
-}
+ bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    console.log(hash)
+});
+//save this hased password to the db not plaintext
 })
    
 
