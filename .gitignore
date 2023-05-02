@@ -3,9 +3,9 @@ logs
 *.log
 npm-debug.log*
 
-./server/node_modules
-./client/node_modules
-./client/.next
+**/node_modules
+**/node_modules
+**/.next
 
 # Runtime data
 pids
