@@ -1,7 +1,8 @@
 import React from 'react';
  import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
- 
+ import Link from 'next/link'
+ import { Button, message } from 'antd';
  const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
      .min(2, 'Too Short!')
@@ -23,16 +24,23 @@ import React from 'react';
     .required('Required')
  });
 
- const registerUser = async(values)=> {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(values)
-};
-  const res = await fetch('http://localhost:4000/register',requestOptions)
- }
 
  const Register = () => {
+
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const registerUser = async(values)=> {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values)
+  };
+    const res = await fetch('http://localhost:4000/register',requestOptions)
+    if(res){
+      messageApi.success('Register success!');
+    }
+   }
+  
    return (
     <div>
       <h1>Signup</h1>
@@ -78,9 +86,11 @@ import React from 'react';
             <br/>
 
             <button type="submit">Submit</button>
+            Already have an account yet? <Link href="/">Login</Link> instead 
           </Form>
         )}
       </Formik>
+      {contextHolder}
     </div>
   );
  }
