@@ -3,7 +3,10 @@ logs
 *.log
 npm-debug.log*
 
-**/node_modules
+./server/node_modules
+./client/node_modules
+./client/.next
+
 **/node_modules
 **/.next
 
