@@ -2,6 +2,8 @@ const express = require('express')
 //
 const mongoose = require('mongoose');
 const cors = require('cors')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const app = express()
 const port = 4000
 app.use(cors())
@@ -34,26 +36,48 @@ app.use(express.json())
 
 
 app.post('/register', async(req, res) => {
-try{
-  const data=  await Users.create(req.body)
-  if(data){
-    res.json({msg: "user has been registered"})
-  }
 
-  
-}catch(err){
-  console.log(err)
+const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
+console.log(data)
+if(data){
+  res.json({
+    msg: "Already exist"
+  })
+}else{
+  const hash = await bcrypt.hash(req.body.password, 0)
+  console.log(hash)
+  if(hash){
+    req.body.password = hash
+    const data = await Users.create(req.body)
+    if(data) {
+      res.json({
+        msg: "Register success"
+      })
+    }
+  }
 }
+
 })
    
 
+
+
 app.post('/login', async (req, res) => {
-    const data = await Users.findOne({phoneNumber: req.body.phoneNumber, password:req.body.password})
-    if(data){
-      res.json({message: "login succcess"})
-    }else{
-      res.json({message: "login failed"})
-    }
+  const data = await Users.findOne({phoneNumber: req.body.phoneNumber})
+  if(data){
+    const isMatched = await bcrypt.compare(req.body.password, data.password)
+    console.log(isMatched)
+  if(isMatched) {
+    res.json({message: "login succcess"})
+  }else{
+    res.json({message: "login failed"})
+  }
+  }
+ 
+  //do we need hash?
+  // do we need new password?
+  //how to knnow if pass matched?
+  
 })
 
 
