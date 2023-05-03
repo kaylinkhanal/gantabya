@@ -41,7 +41,8 @@ const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
 console.log(data)
 if(data){
   res.json({
-    msg: "Already exist"
+    msg: "Already exist",
+    success:false
   })
 }else{
   const hash = await bcrypt.hash(req.body.password, 0)
@@ -51,7 +52,9 @@ if(data){
     const data = await Users.create(req.body)
     if(data) {
       res.json({
-        msg: "Register success"
+        msg: "Register success",
+        success:true
+
       })
     }
   }
@@ -66,11 +69,10 @@ app.post('/login', async (req, res) => {
   const data = await Users.findOne({phoneNumber: req.body.phoneNumber})
   if(data){
     const isMatched = await bcrypt.compare(req.body.password, data.password)
-    console.log(isMatched)
   if(isMatched) {
-    res.json({message: "login succcess"})
+    res.json({message: "login succcess", success:true})
   }else{
-    res.json({message: "login failed"})
+    res.json({message: "login failed",success:false})
   }
   }
  
