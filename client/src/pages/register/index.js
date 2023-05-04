@@ -2,6 +2,7 @@ import React from 'react';
  import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
  import Link from 'next/link'
+ import styles from './Register.module.css'
  import { Button, message } from 'antd';
  const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -12,37 +13,46 @@ import React from 'react';
      .min(2, 'Too Short!')
      .max(50, 'Too Long!')
      .required('Required'),
-    phoneNumber:Yup.string()
-     .min(2, 'Too Short!')
-     .max(50, 'Too Long!')
+    phoneNumber:Yup.number()
+    .typeError('must be a number')
+    .test('checkLength', 'the number should exactly be 10 digits', val=> val.toString().length ==10 )
      .required('Required'),
      confirmPassword: Yup.string().oneOf(
       [Yup.ref("password"), null],
       "Passwords must match"
-    ),
+    )
+    ,
    role: Yup.string()
     .required('Required')
  });
 
 
  const Register = () => {
-
-
   const [messageApi, contextHolder] = message.useMessage();
   const registerUser = async(values)=> {
+ 
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
   };
+
+  try{
     const res = await fetch('http://localhost:4000/register',requestOptions)
-    if(res){
-      messageApi.success('Register success!');
+    const data = await res.json()
+    if(res && data.success){
+      messageApi.success(data.msg);
+    }else{
+      messageApi.error(data.msg);
     }
+    }catch(err){
+      messageApi.warning(data.msg);
+    }
+  
    }
   
    return (
-    <div>
+    <div className={styles.Form}>
       <h1>Signup</h1>
       <Formik
         initialValues={{
@@ -85,7 +95,7 @@ import React from 'react';
             {errors.role && touched.role ? <div>{errors.role}</div> : null}
             <br/>
 
-            <button type="submit">Submit</button>
+            <button  type="submit">Submit</button>
             Already have an account yet? <Link href="/">Login</Link> instead 
           </Form>
         )}
