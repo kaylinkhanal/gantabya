@@ -22,7 +22,7 @@ const Home = ()=> {
     <>
             <input placeholder="Mobile Number" onChange={(e)=>setPhoneNumber(e.target.value)}/>
             <input placeholder="password" onChange={(e)=>setPassword(e.target.value)}/>
-            <button onClick={handleLogin}>Login</button>
+            <button className={styles.Btn} onClick={handleLogin}>Login</button>
             <br/>
             Don't have an account yet? <Link href="/register">Sign Up</Link> instead 
     </>
