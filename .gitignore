@@ -7,8 +7,12 @@ npm-debug.log*
 ./client/node_modules
 ./client/.next
 
+/server/.env
+
+
 **/node_modules
 **/.next
+**/.env
 
 # Runtime data
 pids
