@@ -1,2 +1,2 @@
-[ ] test
-[x] test
+- [ ] Mercury
+- [x] Venus
