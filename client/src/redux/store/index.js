@@ -6,7 +6,7 @@ const makeStore = () =>
     reducer: {
       [userSlice.name]: userSlice.reducer,
     },
-    devTools: true,
+    devTools:  true,
   });
 
 export const wrapper = createWrapper(makeStore);
