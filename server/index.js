@@ -1,13 +1,14 @@
 const express = require('express')
 //
 const mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 const cors = require('cors')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const app = express()
 const port = 4000
 app.use(cors())
-
+require('dotenv').config()
 
 const connectToDb = async()=>{
   try{
@@ -36,12 +37,12 @@ app.use(express.json())
 
 
 app.post('/register', async(req, res) => {
-
 const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
 console.log(data)
 if(data){
   res.json({
-    msg: "Already exist"
+    msg: "Already exist",
+    success:false
   })
 }else{
   const hash = await bcrypt.hash(req.body.password, 0)
@@ -51,7 +52,9 @@ if(data){
     const data = await Users.create(req.body)
     if(data) {
       res.json({
-        msg: "Register success"
+        msg: "Register success",
+        success:true
+
       })
     }
   }
@@ -63,22 +66,24 @@ if(data){
 
 
 app.post('/login', async (req, res) => {
+  //user found in db?
   const data = await Users.findOne({phoneNumber: req.body.phoneNumber})
   if(data){
-    const isMatched = await bcrypt.compare(req.body.password, data.password)
-    console.log(isMatched)
-  if(isMatched) {
-    res.json({message: "login succcess"})
+          //user cred match
+          const isMatched = await bcrypt.compare(req.body.password, data.password)
+        if(isMatched) {
+          //generete the token for this matched user and send the token as reponse
+          const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
+          res.json({message: "login succcess", success:true, token: token})
+        }else{
+          res.json({message: "login failed",success:false})
+        }
   }else{
-    res.json({message: "login failed"})
-  }
+    res.json({message: "user not exist",success:false})
   }
  
-  //do we need hash?
-  // do we need new password?
-  //how to knnow if pass matched?
-  
 })
+
 
 
 
