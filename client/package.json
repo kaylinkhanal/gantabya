@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.4.6",
     "formik": "^2.2.9",
     "next": "13.3.1",
+    "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "yup": "^1.1.1"
   }
 }
