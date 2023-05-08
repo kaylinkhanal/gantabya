@@ -2,7 +2,12 @@ import React from 'react';
  import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
  import Link from 'next/link'
- import styles from './Register.module.css'
+ import styles from '../../styles/registration.module.css'
+ //
+ import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import {Input } from 'antd';
+ //
+
  import { Button, message } from 'antd';
  const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -52,8 +57,9 @@ import React from 'react';
    }
   
    return (
-    <div className={styles.Form}>
-      <h1>Signup</h1>
+    <div className={styles.formcontainer}>
+    
+    
       <Formik
         initialValues={{
           fullName: '',
@@ -69,38 +75,53 @@ import React from 'react';
         }}
       >
         {({ errors, touched }) => (
-          <Form>
-            <Field name="fullName" placeholder="fullName" />
+          
+          
+            
+          <Form className={styles.Home_form}>
+          <h1>Register User</h1>
+          <img
+             src="https://o.remove.bg/downloads/a3fcc01b-97a5-44fb-87b5-5048a181a356/image-removebg-preview.png"
+              alt="Government of Nepal"
+              style={{ width: '100px', height: '80px' }}
+                        />
+            <Field className={styles.UserInput} prefix={<UserOutlined className="site-form-item-icon" />} name="fullName" placeholder="fullName" />
             {errors.fullName && touched.fullName ? (
-              <div>{errors.fullName}</div>
+              <div className={styles.errormessage}>{errors.fullName}</div>
             ) : null}
             <br/>
-            <Field name="password" placeholder="password" />
+            <Field className={styles.UserInput} name="password" placeholder="password" />
             {errors.password && touched.password ? (
-              <div>{errors.password}</div>
+              <div className={styles.errormessage}>{errors.password}</div>
             ) : null}
             <br/>
 
-              <Field name="confirmPassword"  placeholder="confirm password" />
+              <Field className={styles.UserInput} name="confirmPassword"  placeholder="confirm password" />
             {errors.confirmPassword && touched.confirmPassword ? (
-              <div>{errors.confirmPassword}</div>
+              <div className={styles.errormessage}>{errors.confirmPassword}</div>
             ) : null}
             <br/>
 
-            <Field name="phoneNumber" placeholder="phoneNumber"/>
-            {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
+            <Field className={styles.UserInput} name="phoneNumber" placeholder="phoneNumber"/>
+            {errors.phoneNumber && touched.phoneNumber ? <div className={styles.errormessage}>{errors.phoneNumber}</div> : null}
             <br/>
+                        <Field className={styles.UserInput} as="select" name="role">
+                            <option value="">Choose one</option>
+                            <option value="admin">admin</option>
+                            <option value="rider">rider</option>
+                            <option value="user">user</option>
+                        </Field>
+                        {errors.role && touched.role ? <div className={styles.errormessage}>{errors.role}</div> : null}
 
-            <Field name="role" placeholder="role"/>
-            {errors.role && touched.role ? <div>{errors.role}</div> : null}
-            <br/>
 
-            <button  type="submit">Submit</button>
-            Already have an account yet? <Link href="/">Login</Link> instead 
+            <button className={styles.Form_button}  type="submit">Submit</button>
+            Register if don't have Account <Link href="/" className={styles.Form_button}>Login</Link>
           </Form>
+        
         )}
       </Formik>
       {contextHolder}
+      
     </div>
   );
  }

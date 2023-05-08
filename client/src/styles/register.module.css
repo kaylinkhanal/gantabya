@@ -1,0 +1,51 @@
+.register {
+  margin-top: 33px;
+  margin-left: 203px;
+  margin-right: 203px;
+  background-color:#4cb944;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid #a91919;
+  border-radius: 40px;
+  box-sizing: border-box;
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.body{
+  background-color: black;
+}
+.Fisdfeld{
+  font-size: larger;
+  text-align: center;
+  color: #4cb944;
+}
+.Field  {
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: overline;
+  padding: 12px 20px;
+  align-items: center;
+  text-align: center;
+  margin: 2px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.Field placeholder {
+  color: #a91919;
+}
+.Field span {
+  display: inline-block;
+  transition: transform 200ms;
+
+}
+
+.input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
