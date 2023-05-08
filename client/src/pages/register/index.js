@@ -20,10 +20,12 @@ import React from 'react';
      confirmPassword: Yup.string().oneOf(
       [Yup.ref("password"), null],
       "Passwords must match"
-    )
-    ,
+    ),
    role: Yup.string()
-    .required('Required')
+    .required('Required'),
+    
+    address:Yup.string()
+    .required("Required")
  });
 
 
@@ -59,7 +61,9 @@ import React from 'react';
           fullName: '',
           password: '',
           phoneNumber: '',
-          role:''
+          role:'',
+          address:'',
+          vechicleType:''
         }}
         validationSchema={SignupSchema}
         onSubmit={values => {
@@ -70,32 +74,71 @@ import React from 'react';
       >
         {({ errors, touched }) => (
           <Form>
-            <Field name="fullName" placeholder="fullName" />
+            <Field name="fullName" placeholder="FullName" />
             {errors.fullName && touched.fullName ? (
               <div>{errors.fullName}</div>
             ) : null}
             <br/>
-            <Field name="password" placeholder="password" />
+            <Field name="password" placeholder="Password" />
             {errors.password && touched.password ? (
               <div>{errors.password}</div>
             ) : null}
             <br/>
 
-              <Field name="confirmPassword"  placeholder="confirm password" />
+              <Field name="confirmPassword"  placeholder="Confirm password" />
             {errors.confirmPassword && touched.confirmPassword ? (
               <div>{errors.confirmPassword}</div>
             ) : null}
             <br/>
 
-            <Field name="phoneNumber" placeholder="phoneNumber"/>
+            <Field name="phoneNumber" placeholder="PhoneNumber"/>
             {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
             <br/>
-
-            <Field name="role" placeholder="role"/>
+           
+            <div id="my-radio-group">Picked</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" name="picked" value="One" />
+              User
+            </label>
+            <label>
+              <Field type="radio" name="picked" value="Two" />
+             Rider
+            </label>
+            </div>
+<br/>
+            <Field name="role" placeholder="Role"/>
             {errors.role && touched.role ? <div>{errors.role}</div> : null}
             <br/>
+            <Field name="address" placeholder="Address"/>
+            {errors.address && touched.address ? <div>{errors.address}</div> : null}
+            <br/>
+           Select your Vehicle :
+           
+            {errors.vehicleType && touched.vehicleType? <div>{errors.vehicleType}</div> : null}
+           <select name="vehicleType">
+              
+              <option value="option1">Bike</option>
+              <option value="option2"> Car</option>
+
+
+
+              </select>
+
+              <br/>
+              <br/>
+              
+              
+              
+              
+              
+
+          
+
+
 
             <button  type="submit">Submit</button>
+            <br/>
             Already have an account yet? <Link href="/">Login</Link> instead 
           </Form>
         )}
