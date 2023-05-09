@@ -36,7 +36,7 @@ const Home = () => {
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
-  const { token } = useSelector(state => state.user)
+  const { token } = useSelector(state => state)
 
   const handleLogin = async (values) => {
     const requestOptions = {
