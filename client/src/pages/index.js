@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import {useState } from 'react';
 import styles from '@/styles/Home.module.css'
+import Menu from '@/components/menu.js'
 import Link from 'next/link'
 import { useDispatch,useSelector } from 'react-redux'
 import {setToken} from '../redux/reducerSlice/userSlice'
@@ -13,16 +14,21 @@ const Home = ()=> {
   const dispatch = useDispatch()
   const {token} = useSelector(state=>state.user)
   const handleLogin = async()=>{
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phoneNumber: phoneNumber, password:password })
-  };
-    const res = await fetch('http://localhost:4000/login',requestOptions)
-    const data = await res.json()
-    if(data){
-      dispatch(setToken(data.token))
+    try{
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber: phoneNumber, password:password })
+    };
+      const res = await fetch('http://localhost:4000/login',requestOptions)
+      const data = await res.json()
+      if(data){
+        dispatch(setToken(data.token))
+      }
+    }catch(err){
+      console.log(err)
     }
+ 
   }
 
   const handleLogout = ()=>{
@@ -32,6 +38,8 @@ const Home = ()=> {
   if(token){
      return( 
      <div>
+       <Menu/>
+      
         i am home page
         <button onClick={handleLogout}>Logout</button>
       </div>
