@@ -81,8 +81,8 @@ import {Input } from 'antd';
           <Form className={styles.Home_form}>
           <h1>Register User</h1>
           <img
-             src="https://o.remove.bg/downloads/a3fcc01b-97a5-44fb-87b5-5048a181a356/image-removebg-preview.png"
-              alt="Government of Nepal"
+             src="https://yt3.googleusercontent.com/ukSizn5ErG26QsBj8CZEXg9ee29vkyMJEiRqLnWQI9E84YysMXec3Y5W3XE8uk5ZceltEhhNWg=s900-c-k-c0x00ffffff-no-rj"
+              alt="Logo"
               style={{ width: '100px', height: '80px' }}
                         />
             <Field className={styles.UserInput} prefix={<UserOutlined className="site-form-item-icon" />} name="fullName" placeholder="fullName" />
