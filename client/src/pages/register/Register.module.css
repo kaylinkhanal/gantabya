@@ -1,3 +1,122 @@
-.Form{
-    background-color: rgb(201, 201, 201);
+.Home_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 400px;
+
+  border-radius: 5%;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-size: cover;
+  height: 100vh;
+}
+
+.Home_input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(191, 26, 26);
+  font-size: 12px;
+  width: 80%;
+  margin-bottom: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.Home_button {
+  background-color: #0070f3;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.toggleContainer span {
+  margin-right: 10px;
+}
+
+.formTitle {
+  font-size: 26px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 3px;
+  margin-bottom: 15px;
+}
+
+.formLabel {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.switch_user {
+  padding-bottom: 20px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  line-height: 15spx;
+  background-color: #4cb944;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
+.submitButton:hover {
+  background-color: #0069d9;
+}
+
+.switch_user {
+    font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.switch_user > div {
+  display: flex;
+  align-items: center;
+}
+
+.switch_user span {
+  margin: 0 10px;
+}
+
+.ant-switch-checked {
+  background-color: #16e6a8;
+}
+
+.Home_select {
+  width: 85%;
+  height: 40px;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
