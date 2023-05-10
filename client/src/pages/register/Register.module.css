@@ -64,6 +64,11 @@
   padding-bottom: 20px;
 }
 
+.ant-switch-checked:hover {
+  background-color: purple;
+  border: 2px solid orange;
+  border-radius: 4px;
+}
 .submitButton {
   width: 100%;
   padding: 10px;
@@ -84,7 +89,7 @@
 
 .switch_user {
     font-size: 22px;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
@@ -100,9 +105,9 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0 10px;
 }
 
-.ant-switch-checked {
+/* .ant-switch-checked {
   background-color: #16e6a8;
-}
+} */
 
 .Home_select {
   width: 85%;

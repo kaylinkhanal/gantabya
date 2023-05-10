@@ -4,10 +4,8 @@ import {userSlice} from "../reducerSlice/userSlice"
 const makeStore = () =>
   configureStore({
     reducer: {
-      [userSlice.name]: userSlice.reducer,
-      
-  
-    devTools:  true,
+      [userSlice.name]: userSlice.reducer
+    }
   });
 
 export const wrapper = createWrapper(makeStore);
