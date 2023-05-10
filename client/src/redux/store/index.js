@@ -5,7 +5,8 @@ const makeStore = () =>
   configureStore({
     reducer: {
       [userSlice.name]: userSlice.reducer,
-    },
+      
+  
     devTools:  true,
   });
 

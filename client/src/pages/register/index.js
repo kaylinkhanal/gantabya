@@ -122,9 +122,14 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { Button, message, Switch } from 'antd';
+
 import styles from './Register.module.css';
+import { useDispatch, useSelector } from 'react-redux'
 
-const UserSignupSchema = Yup.object().shape({
+
+
+
+const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
@@ -136,20 +141,7 @@ const UserSignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
-});
-
-const RiderSignupSchema = Yup.object().shape({
-  fullName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  password: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  phoneNumber: Yup.string()
-    .matches(/^\d{10}$/, 'Phone number must be 10 digits')
-    .required('Required'),
+  role: Yup.string(),
   licenseNumber: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
@@ -166,6 +158,7 @@ const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isUser, setIsUser] = useState(true);
 
+
   const registerUser = async (values) => {
     const requestOptions = {
       method: 'POST',
@@ -175,7 +168,9 @@ const Register = () => {
 
     try {
       const res = await fetch('http://localhost:4000/register', requestOptions)
+      console.log(res)
       const data = await res.json()
+      console.log(data)
       if (res && data.success) {
         messageApi.success(data.msg);
       } else {
@@ -192,16 +187,17 @@ const Register = () => {
 
   return (
     <div className={styles.container}>
-      <Formik nitialValues={{
+      <Formik initialValues={{
         fullName: '',
         password: '',
         phoneNumber: '',
         confirmPassword: '',
+        role:'',
         licenseNumber: '',
         vehicleNumber: '',
         vehicleType: '',
       }}
-        validationSchema={isUser ? UserSignupSchema : RiderSignupSchema}
+        validationSchema={SignupSchema}
         onSubmit={values => {
           registerUser(values);
         }}
@@ -254,9 +250,6 @@ const Register = () => {
                 <div>{errors.confirmPassword}</div>
               ) : null}
 
-              <button type="submit" className={styles.submitButton}>Submit</button>
-
-              Already have an account? <Link href="/">Login</Link>
 
             </>) : (<>
               <Field name="fullName" placeholder="Full Name" className={styles.Home_input} />
@@ -276,9 +269,10 @@ const Register = () => {
               {errors.confirmPassword && touched.confirmPassword ? (
                 <div>{errors.confirmPassword}</div>
               ) : null}
-              <button type="submit" className={styles.submitButton}>Submit</button>
+            </>)}
+            <button type="submit" className={styles.submitButton}>Submit</button>
 
-              Already have an account? <Link href="/">Login</Link> </>)}
+            Already have an account? <Link href="/">Login</Link>
 
 
 
@@ -300,3 +294,6 @@ const Register = () => {
 }
 
 export default Register;
+
+
+

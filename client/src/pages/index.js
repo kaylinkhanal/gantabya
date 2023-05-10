@@ -46,10 +46,15 @@ const Home = () => {
     };
     try {
       const res = await fetch('http://localhost:4000/login', requestOptions)
-      const data = await res.json()
-      if (data.success) {
+      const dinesh = await res.json()
+      
+
+      if (dinesh.success) {
         message.success("login successful");
-        dispatch(setToken(data.token))
+
+
+
+        dispatch(setToken(dinesh.token))
       } else {
         message.error("login failed, try again");
       }
