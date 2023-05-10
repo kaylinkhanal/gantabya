@@ -1,5 +1,5 @@
 const express = require('express')
-//
+
 const mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 const cors = require('cors')
@@ -27,7 +27,9 @@ const userSchema = new mongoose.Schema({
   fullName: String, 
   password: String,
   phoneNumber: String,
-  role: String
+  role: String,
+  address: String,
+  vehicleType: String
 });
 
 const Users = mongoose.model('Users', userSchema);
@@ -37,6 +39,7 @@ app.use(express.json())
 
 
 app.post('/register', async(req, res) => {
+  try{
 const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
 console.log(data)
 if(data){
@@ -58,6 +61,9 @@ if(data){
       })
     }
   }
+} } catch(err){
+  message.error("Unable to find data in the database")
+
 }
 
 })
@@ -73,7 +79,7 @@ app.post('/login', async (req, res) => {
           const isMatched = await bcrypt.compare(req.body.password, data.password)
         if(isMatched) {
           //generete the token for this matched user and send the token as reponse
-          const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
+          const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.Secretkey);
           res.json({message: "login succcess", success:true, token: token})
         }else{
           res.json({message: "login failed",success:false})
