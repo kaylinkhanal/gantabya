@@ -89,6 +89,9 @@ const Home = () => {
         <div className={styles.nav}></div>
         <div>
           <p className={styles.navTitle}>Gantabya</p>
+          <div className={styles.logo}>
+            <img src="https://user-images.githubusercontent.com/110533553/236834215-fa6b3214-ae99-4f98-804e-67c0d4abf9bd.png" className={styles.logo}/>
+          </div>
         </div>
 
         <Formik
