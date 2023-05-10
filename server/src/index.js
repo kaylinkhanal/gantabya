@@ -1,5 +1,5 @@
 const express = require('express')
-//
+
 const mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 const cors = require('cors')
@@ -27,7 +27,9 @@ const userSchema = new mongoose.Schema({
   fullName: String, 
   password: String,
   phoneNumber: String,
-  role: String
+  role: String,
+  address: String,
+  vehicleType: String
 });
 
 const Users = mongoose.model('Users', userSchema);
@@ -37,28 +39,35 @@ app.use(express.json())
 
 
 app.post('/register', async(req, res) => {
-const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
-console.log(data)
-if(data){
-  res.json({
-    msg: "Already exist",
-    success:false
-  })
-}else{
-  const hash = await bcrypt.hash(req.body.password, 0)
-  console.log(hash)
-  if(hash){
-    req.body.password = hash
-    const data = await Users.create(req.body)
-    if(data) {
-      res.json({
-        msg: "Register success",
-        success:true
-
-      })
+  try {
+    const data = await Users.findOne({phoneNumber:req.body.phoneNumber })
+  console.log(data)
+  if(data){
+    res.json({
+      msg: "Already exist",
+      success:false
+    })
+  }else{
+    const hash = await bcrypt.hash(req.body.password, 0)
+    console.log(hash)
+    if(hash){
+      req.body.password = hash
+      const data = await Users.create(req.body)
+      if(data) {
+        res.json({
+          msg: "Register success",
+          success:true
+  
+        })
+      }
     }
   }
-}
+    
+  } catch (error) {
+    message.error("Unable to get response from register")
+    
+  }
+
 
 })
    
@@ -67,7 +76,8 @@ if(data){
 
 app.post('/login', async (req, res) => {
   //user found in db?
-  const data = await Users.findOne({phoneNumber: req.body.phoneNumber})
+  try{
+    const data = await Users.findOne({phoneNumber: req.body.phoneNumber})
   if(data){
           //user cred match
           const isMatched = await bcrypt.compare(req.body.password, data.password)
@@ -80,7 +90,10 @@ app.post('/login', async (req, res) => {
         }
   }else{
     res.json({message: "user not exist",success:false})
-  }
+  }} catch(err){
+    message.error(res.json)
+  } 
+
  
 })
 
