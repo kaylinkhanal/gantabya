@@ -20,16 +20,13 @@ const SignupSchema = Yup.object().shape({
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
   role: Yup.string(),
-  // licenseNumber: Yup.string()
-  //   .min(2, 'Too Short!')
-  //   .max(50, 'Too Long!')
-  //   .required('Required'),
-  // vehicleNumber: Yup.string()
-  //   .min(2, 'Too Short!')
-  //   .max(50, 'Too Long!')
-  //   .required('Required'),
-  // vehicleType: Yup.string()
-  //   .required('Required'),
+  licenseNumber: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!'),
+  vehicleNumber: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!'),
+  vehicleType: Yup.string()
 });
 
 const Register = () => {
@@ -95,17 +92,17 @@ const Register = () => {
                 <Field name="phoneNumber" placeholder="Phone Number" className={styles.Home_input} />
               {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
 
-              <Field name="password" placeholder="Password" className={styles.Home_input} />
+              <Field name="password" type="password" placeholder="Password" className={styles.Home_input} />
               {errors.password && touched.password ? (
                 <div>{errors.password}</div>
               ) : null}
-              <Field name="confirmPassword" placeholder="Confirm password" className={styles.Home_input} />
+              <Field name="confirmPassword" type="password" placeholder="Confirm password" className={styles.Home_input} />
               {errors.confirmPassword && touched.confirmPassword ? (
                 <div>{errors.confirmPassword}</div>
               ) : null}
               <div>
                 <Switch 
-                defaultChecked={true} 
+                defaultChecked={false} 
                 style={{backgroundColor:isRider? 'blue':'red'}}
                 onChange={switchRider} />
                 <span>Rider</span>
