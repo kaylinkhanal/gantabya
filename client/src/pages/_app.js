@@ -1,12 +1,13 @@
 import '@/styles/globals.css'
 import { Provider } from 'react-redux';
-import { wrapper } from '../redux/store/index';
-function App({ Component, ...rest }) {
-  const { store, props } = wrapper.useWrappedStore(rest);
-  const { pageProps } = props;
+import { persistor, store } from '../redux/store/index';
+import { PersistGate } from 'redux-persist/integration/react';
+function App({ Component}) {
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+    <PersistGate loading={null} persistor={persistor}>
+      <Component />
+      </PersistGate>
     </Provider>
   );
 }

@@ -1,11 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
-import {userSlice} from "../reducerSlice/userSlice" 
-const makeStore = () =>
-  configureStore({
-    reducer: {
-      [userSlice.name]: userSlice.reducer
-    }
-  });
+import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "../reducerSlice/userSlice";
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
-export const wrapper = createWrapper(makeStore);
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, userReducer)
+
+export const store = configureStore({
+  reducer: persistedReducer,
+})
+
+export const persistor = persistStore(store)
