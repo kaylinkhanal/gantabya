@@ -40,13 +40,14 @@ import React from 'react';
   try{
     const res = await fetch('http://localhost:4000/register',requestOptions)
     const data = await res.json()
-    if(res && data.success){
-      messageApi.success(data.msg);
-    }else{
-      messageApi.error(data.msg);
-    }
+    console.log(data)
+    // if(res && data.success){
+    //   messageApi.success(data.msg);
+    // }else{
+    //   messageApi.error(data.msg);
+    // }
     }catch(err){
-      messageApi.warning(data.msg);
+      console.log(err)
     }
   
    }
