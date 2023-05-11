@@ -5,7 +5,7 @@
   padding: 1rem;
   border: 1px solid #ccc;
   width: 400px;
-  background-color:#F5EE9E;
+  background-color: #ccc;
   border-radius: 5%;
 }
 
@@ -30,13 +30,24 @@
   /* border: none; */
 }
 .Form_button {
-  background-color: #0070f3;
+  background-color: #4cb944;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   border: none;
   font-size: 1rem;
   cursor: pointer;
+  /*   width: 100%;
+  padding: 10px;
+  line-height: 15spx;
+  background-color: #4cb944;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;*/
 }
 .toggleContainer {
   display: flex;

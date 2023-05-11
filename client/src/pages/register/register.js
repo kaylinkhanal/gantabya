@@ -1,4 +1,5 @@
 import { Button, Checkbox,Select, Radio,Option, Form, Input } from 'antd';
+import styles from '@/styles/Home.module.css'
 const onFinish = (values) => {
   console.log('Success:', values);
 };

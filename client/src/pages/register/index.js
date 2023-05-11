@@ -3,7 +3,9 @@ import React from 'react';
  import * as Yup from 'yup';
  import Link from 'next/link'
  import styles from '../../styles/registration.module.css'
+ import style1 from '../../styles/Home.module.css'
  //
+ import newstyles from '@/styles/Home.module.css'
  import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import {Input } from 'antd';
  //
@@ -79,7 +81,7 @@ import {Input } from 'antd';
           
             
           <Form className={styles.Home_form}>
-          <h1>Register User</h1>
+          <h1>Register User</h1> 
           <img
              src="https://yt3.googleusercontent.com/ukSizn5ErG26QsBj8CZEXg9ee29vkyMJEiRqLnWQI9E84YysMXec3Y5W3XE8uk5ZceltEhhNWg=s900-c-k-c0x00ffffff-no-rj"
               alt="Logo"
