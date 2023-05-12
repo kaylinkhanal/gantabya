@@ -40,22 +40,15 @@ const Login  = ()=>{
       try {
         const res = await fetch('http://localhost:4000/login', requestOptions)
         const data = await res.json()
-        
-  
         if (data.success) {
           message.success("login successful");
-  
-  
-  
           dispatch(setToken(data.token))
         } else {
           message.error("login failed, try again");
         }
       } catch (err) {
-        messageApi.warning(data.msg);
-  
+        messageApi.warning(data.message);
       }
-  
     }
   
     const handleCreateClick = () => {

@@ -9,11 +9,11 @@ import { useSelector } from 'react-redux'
 const inter = Inter({ subsets: ['latin'] })
 const Main = () => {
   const { token } = useSelector(state => state.user)
- 
+console.log(token)
   return (
     <div>
       <Navbar/>
-      {token ? <Home/> : <Auth/>}
+      {token ? <Home/> : <Login/>}
     </div>
   )
 }
