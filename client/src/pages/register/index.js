@@ -2,7 +2,7 @@ import React from 'react';
  import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
  import Link from 'next/link'
- import styles from './Register.module.css'
+ import styles from '../../styles/Register.module.css'
  import { Button, message } from 'antd';
  const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
