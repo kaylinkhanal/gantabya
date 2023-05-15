@@ -28,7 +28,6 @@ router.post('/register', async (req, res) => {
 
 })
 
-
 router.post('/login', async (req, res) => {
   //user found in db?
   const data = await Users.findOne({ phoneNumber: req?.body?.phoneNumber })

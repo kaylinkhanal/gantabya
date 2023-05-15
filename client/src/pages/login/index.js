@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken } from '../../redux/reducerSlice/userSlice'
+import { setToken, setRole } from '../../redux/reducerSlice/userSlice'
 import { useFormik, Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'
 import { useRouter } from "next/router";
@@ -43,11 +43,13 @@ const Login  = ()=>{
         if (data.success) {
           message.success("login successful");
           dispatch(setToken(data.token))
+          dispatch(setRole(data.role))
         } else {
           message.error("login failed, try again");
         }
       } catch (err) {
-        messageApi.warning(data.message);
+        // error tracking tools
+        messageApi.warning('Server issues, try again');
       }
     }
   

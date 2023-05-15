@@ -20,16 +20,7 @@ const SignupSchema = Yup.object().shape({
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
   role: Yup.string(),
-  // licenseNumber: Yup.string()
-  //   .min(2, 'Too Short!')
-  //   .max(50, 'Too Long!')
-  //   .required('Required'),
-  // vehicleNumber: Yup.string()
-  //   .min(2, 'Too Short!')
-  //   .max(50, 'Too Long!')
-  //   .required('Required'),
-  // vehicleType: Yup.string()
-  //   .required('Required'),
+
 });
 
 const Register = () => {
