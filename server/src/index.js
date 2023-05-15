@@ -35,30 +35,29 @@ const userSchema = new mongoose.Schema({
 });
 
 const Users = mongoose.model('Users', userSchema);
-
 console.log("connected to database")
 app.use(express.json())
 
 
-app.post('/register', async (req, res) => {
-  const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
-  console.log(data)
-  if (data) {
+app.post('/register',async(req,res)=>{
+  console.log(req.body)
+  const data = await Users.findOne({phoneNumber:req.body.phoneNumber})
+  if (data){
     res.json({
-      msg: "Already exist",
+      msg: "User already exit",
       success: false
+
     })
-  } else {
-    const hash = await bcrypt.hash(req.body.password, 0)
-    console.log(hash)
-    if (hash) {
+  }
+  else {
+    const hash = await bcrypt.hash(req.body.password,0)
+    if (hash){
       req.body.password = hash
       const data = await Users.create(req.body)
-      if (data) {
+      if (data){
         res.json({
-          msg: "Register success",
-          success: true
-
+          msg:"Register success",
+          success:true
         })
       }
     }

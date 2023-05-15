@@ -29,7 +29,7 @@ const SigninSchema = Yup.object({
     .required('Required'),
 });
 
-const Home = () => {
+const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -46,15 +46,15 @@ const Home = () => {
     };
     try {
       const res = await fetch('http://localhost:4000/login', requestOptions)
-      const dinesh = await res.json()
-      
+      const data = await res.json()
 
-      if (dinesh.success) {
+
+      if (data.success) {
         message.success("login successful");
 
 
 
-        dispatch(setToken(dinesh.token))
+        dispatch(setToken(data.token))
       } else {
         message.error("login failed, try again");
       }
@@ -134,4 +134,4 @@ const Home = () => {
     )
   }
 }
-export default Home;
+export default Login;
