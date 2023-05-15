@@ -1,0 +1,19 @@
+.nav {
+  width: 108%;
+  height: 50px;
+  background-color: #4CB944;
+  position: relative;
+  margin-top: -8px;
+  margin-left: -8px;
+}
+
+.navTitle {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 10px;
+  margin-left: 50px;
+}
