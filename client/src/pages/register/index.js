@@ -1,108 +1,133 @@
-import React from 'react';
- import { Formik, Form, Field } from 'formik';
- import * as Yup from 'yup';
- import Link from 'next/link'
- import styles from './Register.module.css'
- import { Button, message } from 'antd';
- const SignupSchema = Yup.object().shape({
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import Link from 'next/link';
+import { Button, message, Switch } from 'antd';
+
+import styles from './Register.module.css';
+import { useDispatch, useSelector } from 'react-redux'
+
+const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
-     .min(2, 'Too Short!')
-     .max(50, 'Too Long!')
-     .required('Required'),
-    password: Yup.string()
-     .min(2, 'Too Short!')
-     .max(50, 'Too Long!')
-     .required('Required'),
-    phoneNumber:Yup.number()
-    .typeError('must be a number')
-    .test('checkLength', 'the number should exactly be 10 digits', val=> val.toString().length ==10 )
-     .required('Required'),
-     confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    )
-    ,
-   role: Yup.string()
-    .required('Required')
- });
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  password: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  phoneNumber: Yup.string()
+    .matches(/^\d{10}$/, 'Phone number must be 10 digits')
+    .required('Required'),
+  role: Yup.string(),
 
+});
 
- const Register = () => {
+const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
-  const registerUser = async(values)=> {
- 
+  const [isRider, setisRider] = useState(false);
+
+
+  const registerUser = async (values) => {
+    values.role = isRider ? 'rider' : 'user'
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
-  };
+    };
 
-  try{
-    const res = await fetch('http://localhost:4000/register',requestOptions)
-    const data = await res.json()
-    if(res && data.success){
-      messageApi.success(data.msg);
-    }else{
-      messageApi.error(data.msg);
-    }
-    }catch(err){
+    try {
+      const res = await fetch('http://localhost:4000/register', requestOptions)
+      console.log(res)
+      const data = await res.json()
+      console.log(data)
+      if (res && data.success) {
+        messageApi.success(data.msg);
+      } else {
+        messageApi.error(data.msg);
+      }
+    } catch (err) {
       messageApi.warning(data.msg);
     }
-  
-   }
-  
-   return (
-    <div className={styles.Form}>
-      <h1>Signup</h1>
-      <Formik
-        initialValues={{
-          fullName: '',
-          password: '',
-          phoneNumber: '',
-          role:''
-        }}
+  };
+
+  const switchRider = (checked) => {
+    setisRider(checked);
+  }
+
+  return (
+    <div className={styles.container}>
+      <Formik initialValues={{
+        fullName: '',
+        password: '',
+        phoneNumber: '',
+        confirmPassword: '',
+        role:'',
+        licenseNumber: '',
+        vehicleNumber: '',
+        vehicleType: '',
+      }}
         validationSchema={SignupSchema}
         onSubmit={values => {
-          // same shape as initial values
-          registerUser(values)
-         
+          registerUser(values);
         }}
       >
+
         {({ errors, touched }) => (
-          <Form>
-            <Field name="fullName" placeholder="fullName" />
-            {errors.fullName && touched.fullName ? (
-              <div>{errors.fullName}</div>
-            ) : null}
-            <br/>
-            <Field name="password" placeholder="password" />
-            {errors.password && touched.password ? (
-              <div>{errors.password}</div>
-            ) : null}
-            <br/>
+          <Form className={styles.Home_form}>
+            <p className={styles.formTitle}>Signup</p>
 
-              <Field name="confirmPassword"  placeholder="confirm password" />
-            {errors.confirmPassword && touched.confirmPassword ? (
-              <div>{errors.confirmPassword}</div>
-            ) : null}
-            <br/>
+            
+            <div className={styles.switch_user}>
+            <Field name="fullName" placeholder="Full Name" className={styles.Home_input} />
+              {errors.fullName && touched.fullName ? (
+                <div>{errors.fullName}</div>
+              ) : null}
+                <Field name="phoneNumber" placeholder="Phone Number" className={styles.Home_input} />
+              {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
 
-            <Field name="phoneNumber" placeholder="phoneNumber"/>
-            {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
-            <br/>
-
-            <Field name="role" placeholder="role"/>
-            {errors.role && touched.role ? <div>{errors.role}</div> : null}
-            <br/>
-
-            <button  type="submit">Submit</button>
-            Already have an account yet? <Link href="/">Login</Link> instead 
+              <Field name="password" placeholder="Password" className={styles.Home_input} />
+              {errors.password && touched.password ? (
+                <div>{errors.password}</div>
+              ) : null}
+              <Field name="confirmPassword" placeholder="Confirm password" className={styles.Home_input} />
+              {errors.confirmPassword && touched.confirmPassword ? (
+                <div>{errors.confirmPassword}</div>
+              ) : null}
+              <div>
+                <Switch 
+                defaultChecked={true} 
+                style={{backgroundColor:isRider? 'blue':'red'}}
+                onChange={switchRider} />
+                <span>Rider</span>
+              </div>
+              {isRider ? (
+                <div>
+                  <Field name="licenseNumber" placeholder="License No" className={styles.Home_input} />
+                  {errors.licenseNumber && touched.licenseNumber ? <div>{errors.licenseNumber}</div> : null}
+                  <Field name="vehicleNumber" placeholder="Vehicle Number" className={styles.Home_input} />
+                  {errors.vehicleNumber && touched.vehicleNumber ? <div>{errors.vehicleNumber}</div> : null}
+                  <Field
+                    name="vehicleType"
+                    className={styles.Home_select}
+                    as="select"
+                    placeholder="Select vehicle type"
+                
+                  >
+                    <option value="">Vehicle Type</option>
+                    <option value="car">Car</option>
+                    <option value="motorcycle">Motorcycle</option>
+                  </Field>
+                  {errors.vehicleType && touched.vehicleType ? <div>{errors.vehicleType}</div> : null}
+                  </div>
+              ) : null}
+            </div>
+            <button type="submit" className={styles.submitButton}>Submit</button>
+            Already have an account? <Link href="/">Login</Link>
           </Form>
         )}
       </Formik>
-      {contextHolder}
-    </div>
-  );
- }
+    </div>)
+}
 
- export default Register
+export default Register;

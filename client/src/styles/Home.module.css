@@ -117,6 +117,63 @@
   transition: background-color 0.2s ease-in-out;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid darkgray;
+}
+
+.loginRegisterButton:hover {
+  background-color: #4ec746;
+}
+
+.signinSignupHint {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Below form */
+.createAccountContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  width: 320px;
+  padding: 15px;
+  border-radius: 4px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.createAccountButton {
+  width: 100%;
+  line-height: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
+.createAccountButton:hover {
+  background-color: #e2e9e2;
+  text-align: center;
+}
+
+/* fading divider line */
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), #ccc),
+    linear-gradient(to right, rgba(255, 255, 255, 0), #ccc);
+}
+
+.registerHint {
+  font-size: 12px;
+  color: #333;
 
 }
 
