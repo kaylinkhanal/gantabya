@@ -4,7 +4,9 @@ const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res) => { 
+  try{
+  
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
   if (data) {
     res.json({
@@ -27,11 +29,15 @@ router.post('/register', async (req, res) => {
     }
   }
 
-})
+}catch(err){
+  messageApi.error("Unable to register")
+
+}})
 
 router.post('/login', async (req, res) => {
   //user found in db?
-  const data = await Users.findOne({ phoneNumber: req?.body?.phoneNumber })
+  try{ 
+     const data = await Users.findOne({ phoneNumber: req?.body?.phoneNumber })
   if (data) {
     //user cred match
     const isMatched = await bcrypt.compare(req.body.password, data.password)
@@ -49,6 +55,10 @@ router.post('/login', async (req, res) => {
     res.json({ message: "user does not exist", success: false })
   }
 
-})
+}catch(err){
+messageApi.error("failed to login, please check your connection")
+}
+}
+)
 
 module.exports=router;

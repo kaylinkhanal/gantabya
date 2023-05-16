@@ -47,7 +47,7 @@ const Register = () => {
         messageApi.error(data.msg);
       }
     } catch (err) {
-      messageApi.warning(data.msg);
+      messageApi.warning("Failed to register the data");
     }
   };
 
