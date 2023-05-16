@@ -1,0 +1,11 @@
+{
+    "admin": {
+        "navItem": ["Home", "Profile", "User Management"]
+    },
+    "user": {
+        "navItem": ["Home", "Profile", "Rides"]
+    },
+    "rider": {
+        "navItem": ["Home", "Profile", "Earnings"]
+    }
+}

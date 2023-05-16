@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import UserDashBoard from './user'
 import RiderDashBoard from './rider'
+import AdminDashBoard from './admin'
 
 import Login from './login'
 import Navbar from '../components/Nav'
@@ -18,6 +19,8 @@ const Main = () => {
         return  <RiderDashBoard/>
       case 'user':
         return <UserDashBoard/>
+      case 'admin':
+        return <AdminDashBoard/>
     }
    
   }
@@ -29,7 +32,6 @@ const Main = () => {
   }
   return (
     <div>
-      {role}
       <Navbar/>
       {token ? <Dashboard/> : <Auth/>}
     </div>
