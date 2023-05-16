@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import { Button, message, Switch } from 'antd';
+import { message, Switch } from 'antd';
+import { useRouter } from 'next/router';
 
 import styles from './Register.module.css';
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,6 +27,7 @@ const SignupSchema = Yup.object().shape({
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isRider, setisRider] = useState(false);
+  const router = useRouter();
 
 
   const registerUser = async (values) => {
@@ -38,11 +40,12 @@ const Register = () => {
 
     try {
       const res = await fetch('http://localhost:4000/register', requestOptions)
-      console.log(res)
+      // console.log(res)
       const data = await res.json()
       console.log(data)
-      if (res && data.success) {
+      if (data.success) {
         messageApi.success(data.msg);
+        router.push('/login')
       } else {
         messageApi.error(data.msg);
       }
@@ -127,6 +130,7 @@ const Register = () => {
           </Form>
         )}
       </Formik>
+      {contextHolder}
     </div>)
 }
 
