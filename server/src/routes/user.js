@@ -3,6 +3,7 @@ const router=express.Router()
 const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+
 router.post('/register', async (req, res) => {
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
   if (data) {
