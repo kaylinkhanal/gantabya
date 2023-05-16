@@ -37,6 +37,7 @@ const Home = () => {
 
   const dispatch = useDispatch()
   const { token } = useSelector(state => state)
+  console.log('>>>>>',token)
 
   const handleLogin = async (values) => {
     const requestOptions = {
