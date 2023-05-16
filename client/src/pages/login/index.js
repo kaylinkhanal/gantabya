@@ -49,7 +49,8 @@ const Login  = ()=>{
         }
       } catch (err) {
         // error tracking tools
-        messageApi.warning('Server issues, try again');
+        // messageApi.warning('Server issues, try again');
+        console.log(err)
       }
     }
   

@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 const loginController=async (req, res) => {
-    console.log(req.body)
     const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
     if (data) {
       res.json({
