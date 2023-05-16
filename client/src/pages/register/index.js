@@ -102,7 +102,7 @@ const Register = () => {
                 defaultChecked={true} 
                 style={{backgroundColor:isRider? 'blue':'red'}}
                 onChange={switchRider} />
-                <span>Rider</span>
+                {isRider?<span>Rider</span>:<span>User</span>}
               </div>
               {isRider && (
                 <div>
