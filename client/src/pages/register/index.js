@@ -47,7 +47,7 @@ const Register = () => {
         messageApi.error(data.msg);
       }
     } catch (err) {
-      messageApi.warning(data.msg);
+      console.log(err)
     }
   };
 
@@ -101,7 +101,7 @@ const Register = () => {
                 onChange={switchRider} />
                 <span>Rider</span>
               </div>
-              {isRider ? (
+              {isRider && (
                 <div>
                   <Field name="licenseNumber" placeholder="License No" className={styles.Home_input} />
                   {errors.licenseNumber && touched.licenseNumber ? <div>{errors.licenseNumber}</div> : null}
@@ -118,9 +118,9 @@ const Register = () => {
                     <option value="car">Car</option>
                     <option value="motorcycle">Motorcycle</option>
                   </Field>
-                  {errors.vehicleType && touched.vehicleType ? <div>{errors.vehicleType}</div> : null}
+                  {errors.vehicleType && touched.vehicleType && (<div>{errors.vehicleType}</div> )}
                   </div>
-              ) : null}
+              )}
             </div>
             <button type="submit" className={styles.submitButton}>Submit</button>
             Already have an account? <Link href="/">Login</Link>
