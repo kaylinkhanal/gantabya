@@ -7,14 +7,14 @@
              ]
     },
     "user": {
-        "navitem": [
+        "navItem": [
         {"label": "Home", "link": "/"},
         {"label": "Profile", "link": "/profil"},
         {"label": "Rides", "link": "/rides"}
         ]
     },
     "rider": {
-        "navitem": [
+        "navItem": [
         {"label": "Home", "link": "/"},
         {"label": "Profile", "link": "/"},
         {"label": "Earnings", "link": "/"}
