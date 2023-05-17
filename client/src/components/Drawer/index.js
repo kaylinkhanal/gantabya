@@ -2,7 +2,7 @@ import { Button, Drawer, Radio, Space } from 'antd';
 import { useState } from 'react';
 import {useSelector} from 'react-redux'
 import navItems from '../../config/navItems.json'
-
+import Link from 'next/link'
 const CutomDrawer = () => {
   const [open, setOpen] = useState(false);
   const {role} =useSelector(state=> state.user)
@@ -22,8 +22,8 @@ const CutomDrawer = () => {
         <Button type="primary" onClick={showDrawer}>
           Open
         </Button>
-        {role}
-            {JSON.stringify(navItems[role])}
+      
+          
       </Space>
       <Drawer
         title="Menu"
@@ -32,9 +32,11 @@ const CutomDrawer = () => {
         onClose={onClose}
         open={open}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+            {navItems[role].navItem.map((item)=>{
+              return(<Link href={item.link}>{item.label}</Link>)
+            })}
+       
+       
       </Drawer>
     </>
   );

@@ -32,7 +32,7 @@ const Main = () => {
   }
   return (
     <div>
-      <Navbar/>
+      {role ? <Navbar/>: null }
       {token ? <Dashboard/> : <Auth/>}
     </div>
   )
