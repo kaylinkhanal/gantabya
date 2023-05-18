@@ -3,6 +3,20 @@ const router=express.Router()
 const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const multer  = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+  console.log("uploading")
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage }).single('avatar')
+
 
 router.post('/register', async (req, res) => {
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
@@ -49,6 +63,11 @@ router.post('/login', async (req, res) => {
     res.json({ message: "user does not exist", success: false })
   }
 
+})
+
+
+router.post('/upload', upload, function (req, res, next) {
+  console.log("uploaded")
 })
 
 module.exports=router;
