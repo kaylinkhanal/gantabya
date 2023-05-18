@@ -77,7 +77,7 @@ const Register = () => {
           <Form className={styles.Home_form}>
             <p className={styles.formTitle}>Signup</p>
 
-            
+         
             <div className={styles.switch_user}>
             <Field name="fullName" placeholder="Full Name" className={styles.Home_input} />
               {errors.fullName && touched.fullName ? (
