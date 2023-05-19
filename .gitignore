@@ -14,6 +14,7 @@ npm-debug.log*
 **/.next
 **/.env
 
+**/uploads
 # Runtime data
 pids
 *.pid

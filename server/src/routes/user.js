@@ -7,40 +7,49 @@ const multer  = require('multer')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, 'uploads/avatar')
   },
   filename: function (req, file, cb) {
-  console.log("uploading")
-    cb(null, file.originalname)
+    const imageName = req.body.phoneNumber+file.originalname
+    cb(null, imageName)
   }
 })
 
 const upload = multer({ storage: storage }).single('avatar')
 
 
-router.post('/register', async (req, res) => {
+router.post('/register', upload, async (req, res) => {
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
   if (data) {
     res.json({
-      msg: "Already exist",
+      msg: 'user already exist',
       success: false
     })
   } else {
     const hash = await bcrypt.hash(req.body.password, 0)
-    console.log(hash)
     if (hash) {
+      //req.body ideall looks like this
+      //req.body = {
+      //   phoneNumber:'98432232',
+      //   role:'user'
+      //.....
+      // }
+
+      //but before doing Users.create(req.body)
+      //req.body also need avatarName
+      //so we assign new key avatarName to req.body
       req.body.password = hash
+
+      req.body.avatarName= req.file.filename
       const data = await Users.create(req.body)
       if (data) {
         res.json({
           msg: "Register success",
           success: true
-
         })
       }
     }
   }
-
 })
 
 router.post('/login', async (req, res) => {
@@ -52,7 +61,7 @@ router.post('/login', async (req, res) => {
     if (isMatched) {
       //generete the token for this matched user and send the token as reponse
       const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
-      res.json({ message: "login succcess", success: true, token: token, role: data.role })
+      res.json({ message: "login succcess", success: true, token: token, role: data.role, id:data._id })
     } else {
       res.json({ message: "login failed", success: false })
     }
@@ -65,9 +74,11 @@ router.post('/login', async (req, res) => {
 
 })
 
-
-router.post('/upload', upload, function (req, res, next) {
-  console.log("uploaded")
+router.get('/avatar/:id', async (req, res) => {
+  console.log(req.params.phoneNumber)
 })
+
+
+
 
 module.exports=router;
