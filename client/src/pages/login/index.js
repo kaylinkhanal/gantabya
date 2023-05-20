@@ -63,10 +63,7 @@ const Login  = ()=>{
     return (
         <>
         <div className={styles.main}>
-        <div className={styles.navTitle}>
-        <div>Gantabya</div>
         
-        </div>
   
           <Formik
             initialValues={initialValues}
@@ -95,8 +92,6 @@ const Login  = ()=>{
             )}
           </Formik>
           {contextHolder}
-  
-  
           <div className={styles.createAccountContainer}>
             <div className={styles.dividerContainer}>
               <div className={styles.line}></div>
