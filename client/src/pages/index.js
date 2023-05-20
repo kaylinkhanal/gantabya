@@ -6,7 +6,8 @@ import RiderDashBoard from './rider'
 import AdminDashBoard from './admin'
 
 import Login from './login'
-import Navbar from '../components/Nav'
+// import Navbar from '../components/Nav'
+import CustomDrawer from '../components/Drawer'
 import { useSelector } from 'react-redux'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -32,7 +33,7 @@ const Main = () => {
   }
   return (
     <div>
-      {role ? <Navbar/>: null }
+      {role ? <CustomDrawer/>: null }
       {token ? <Dashboard/> : <Auth/>}
     </div>
   )
