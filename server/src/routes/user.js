@@ -3,26 +3,14 @@ const router=express.Router()
 const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const multer  = require('multer')
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/avatar')
-  },
-  filename: function (req, file, cb) {
-    const imageName = req.body.phoneNumber+file.originalname
-    cb(null, imageName)
-  }
-})
-
-const upload = multer({ storage: storage }).single('avatar')
+const upload = require('../../middleware/uploadMiddleware')
 
 
 router.post('/register', upload, async (req, res) => {
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
   if (data) {
     res.json({
-      msg: 'user already exist',
+      msg: 'User Already Exist',
       success: false
     })
   } else {
@@ -61,9 +49,9 @@ router.post('/login', async (req, res) => {
     if (isMatched) {
       //generete the token for this matched user and send the token as reponse
       const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
-      res.json({ message: "login succcess", success: true, token: token, role: data.role, id:data._id })
+      res.json({ message: "Login Succcess", success: true, token: token, role: data.role, id:data._id })
     } else {
-      res.json({ message: "login failed", success: false })
+      res.json({ message: "Login Failed", success: false })
     }
   }
   
