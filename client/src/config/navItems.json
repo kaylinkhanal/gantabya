@@ -9,7 +9,7 @@
     "user": {
         "navItem": [
         {"label": "Home", "link": "/"},
-        {"label": "Profile", "link": "/profil"},
+        {"label": "Profile", "link": "/profile"},
         {"label": "Rides", "link": "/rides"}
         ]
     },
