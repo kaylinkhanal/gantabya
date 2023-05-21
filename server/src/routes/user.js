@@ -3,9 +3,9 @@ const router=express.Router()
 const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const upload = require('../../middleware/uploadMiddleware')
-
-
+const upload = require('../middleware/uploadMiddleware')
+const path = require('path')
+const fs =require('fs')
 router.post('/register', upload, async (req, res) => {
   const data = await Users.findOne({ phoneNumber: req.body.phoneNumber })
   if (data) {
@@ -27,8 +27,8 @@ router.post('/register', upload, async (req, res) => {
       //req.body also need avatarName
       //so we assign new key avatarName to req.body
       req.body.password = hash
-
-      req.body.avatarName= req.file.filename
+   
+      req.body.avatarName= req?.file?.filename 
       const data = await Users.create(req.body)
       if (data) {
         res.json({
@@ -63,10 +63,16 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/avatar/:id', async (req, res) => {
-  console.log(req.params.phoneNumber)
+  const userData = await Users.findById(req.params.id)
+  const userImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
+  const defaultImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
+  if(fs.existsSync(userImage)){
+    res.sendFile(userImage)
+  }else{
+    res.sendFile(defaultImage)
+  }
+
 })
-
-
 
 
 module.exports=router;

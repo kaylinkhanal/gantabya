@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     licenseNumber: String,
     vehicleNumber: String,
     vehicleType: String,
-    avatarName: String
+    avatarName: {type: String, default: 'defaultAvatar.png'}
   });
   
   const Users = mongoose.model('Users', userSchema);

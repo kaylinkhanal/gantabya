@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.0",
+    "@react-google-maps/api": "^2.18.1",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.4.6",
     "formik": "^2.2.9",

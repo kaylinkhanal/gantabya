@@ -7,12 +7,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useRouter } from 'next/router';
 import Link from 'next/link'
+import Image from 'next/image';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+
+const containerStyle = {
+  width: '400px',
+  height: '400px'
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523
+};
+
 const CustomDrawer = (props) => {
   const dispatch = useDispatch()
     const handleLogout = () => {
         dispatch(logout())
       }
-      const {role} =useSelector(state=> state.user)
+      const {role, id} =useSelector(state=> state.user)
   const [open, setOpen] = useState(false);
 
   const [visible, setVisible] = React.useState(false);
@@ -42,7 +55,7 @@ const CustomDrawer = (props) => {
       </Button>
       <Drawer
         title="Chose Your Gantabya"
-        placement="right"
+        placement="left"
         closable={false}
         onClose={onClose}
         visible={visible}
@@ -54,11 +67,18 @@ const CustomDrawer = (props) => {
       {/* Your other navbar contents */}
                   
       <div className="navbar-center"  >
-        <Dropdown overlay={menu} placement="bottomRight">
-       
-          <Button shape="circle" size='large' icon={<UserOutlined />} />
-        </Dropdown>
-        Hello <b>{role} </b>
+      <LoadScript
+        googleMapsApiKey="YOUR_API_KEY"
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+        >
+          { /* Child components, such as markers, info windows, etc. */ }
+          <></>
+        </GoogleMap>
+      </LoadScript>
       </div>
     </header>
         }
