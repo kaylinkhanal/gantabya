@@ -1,14 +1,10 @@
-import { useDispatch } from 'react-redux'
-import {logout} from '../../redux/reducerSlice/userSlice'
-const Home = (props)=> {
-    const dispatch = useDispatch()
-    const handleLogout = () => {
-        dispatch(logout())
-      }
+import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+const Home = ()=> {
+  const {role} =useSelector(state=> state.user)
     return (
-        <div>
-        i am user page
-        <button onClick={handleLogout}>Logout</button>
+        <div style={{textAlign:'center'}}>
+          <h1> Hello {role} </h1>
       </div>
     )
 }
