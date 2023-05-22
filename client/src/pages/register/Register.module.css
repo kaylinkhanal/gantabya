@@ -118,6 +118,15 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.showpass{
+  
+  position: relative;
+  left: 78%;
+  top: -48px;
+}
+.required{
+  color: red;
+}
 
 
 
