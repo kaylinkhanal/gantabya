@@ -1,6 +1,6 @@
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-const Home = ()=> {
+const RiderDashBoard = ()=> {
   const {role} =useSelector(state=> state.user)
     return (
         <div style={{textAlign:'center'}}>
@@ -9,4 +9,4 @@ const Home = ()=> {
     )
 }
 
-export default Home
+export default RiderDashBoard

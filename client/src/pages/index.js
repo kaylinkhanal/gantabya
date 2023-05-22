@@ -15,6 +15,7 @@ const Main = () => {
   const { token, role } = useSelector(state => state.user)
 
   const Dashboard = ()=> {
+    debugger
     switch(role){
       case 'rider': 
         return  <RiderDashBoard/>
