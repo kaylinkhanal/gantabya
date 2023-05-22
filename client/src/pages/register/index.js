@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { Button, message, Switch } from 'antd';
+import { useRouter } from 'next/router';
 
 import styles from './Register.module.css';
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,6 +28,7 @@ const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isRider, setisRider] = useState(false);
   const [file, setFile] = useState(null)
+  const router = useRouter();
 
   const registerUser = async (values) => {
     values.role = isRider ? 'rider' : 'user'
@@ -43,6 +45,17 @@ const Register = () => {
     };
     try {
       const res = await fetch('http://localhost:4000/register', requestOptions)
+      const data=await res.json()
+      console.log(data)
+      if(res && data.success){
+        messageApi.success(data.msg)
+        router.push('/login');
+
+      }
+      else{
+        messageApi.error(data.msg)
+      }
+      
    
     } catch (err) {
       // error tracking tools
@@ -56,7 +69,7 @@ const Register = () => {
 
 
   const handleFileSave =(e)=> {
-    console.log(e.target.files)
+    // console.log(e.target.files)
     setFile(e.target.files[0])
   }
 
@@ -132,6 +145,7 @@ const Register = () => {
           </Form>
         )}
       </Formik>
+      {contextHolder}
     </div>)
 }
 

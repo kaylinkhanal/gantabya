@@ -25,8 +25,8 @@ const initialValues = {
 const Login  = ()=>{
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [password, setPassword] = useState('')
+  
+
   
     const dispatch = useDispatch()
     const { token } = useSelector(state => state.user)

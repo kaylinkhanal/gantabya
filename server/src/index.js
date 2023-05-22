@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const dbConnect = require('./connection/dbConnect')
 const userRoute = require('./routes/user')
+const colors=require('colors')
 
 const app = express()
 require('dotenv').config()
@@ -14,5 +15,5 @@ app.use('/',userRoute)
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`.yellow.bold)
 })

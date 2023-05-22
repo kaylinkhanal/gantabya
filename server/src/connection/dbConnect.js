@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const dbConnect = async () => {
     try {
-      const connection = await mongoose.connect('mongodb://127.0.0.1:27017/gantabyaDb');
+      const connection = await mongoose.connect(process.env.MONGO_DB);
       if (connection) {
-        console.log("connnectd to mongodb")
+        console.log("connnectd to mongodb".cyan.underline)
       }
     } catch (err) {
-      console.log(err)
+      console.log(err.red.bold)
     }
   }
 
