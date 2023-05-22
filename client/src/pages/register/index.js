@@ -43,6 +43,13 @@ const Register = () => {
     };
     try {
       const res = await fetch('http://localhost:4000/register', requestOptions)
+      const data=await res.json()
+      if(res && data.success){
+        messageApi.success(data.msg)
+      }
+      else{
+        messageApi.warning(data.msg)
+      }
    
     } catch (err) {
       // error tracking tools
@@ -52,6 +59,7 @@ const Register = () => {
 
   const switchRider = (checked) => {
     setisRider(checked);
+
   }
 
 
@@ -100,12 +108,12 @@ const Register = () => {
               ) : null}
               <div>
                 <Switch 
-                defaultChecked={true} 
+                defaultChecked={false} 
                 style={{backgroundColor:isRider? 'blue':'red'}}
                 onChange={switchRider} />
                 <span>Rider</span>
               </div>
-              {isRider ? (
+              {isRider &&  (
                 <div>
                   <Field name="licenseNumber" placeholder="License No" className={styles.Home_input} />
                   {errors.licenseNumber && touched.licenseNumber ? <div>{errors.licenseNumber}</div> : null}
@@ -124,7 +132,7 @@ const Register = () => {
                   </Field>
                   {errors.vehicleType && touched.vehicleType ? <div>{errors.vehicleType}</div> : null}
                   </div>
-              ) : null}
+              )}
             </div>
             <input type="file" onChange={handleFileSave}/>
             <button type="submit" className={styles.submitButton}>Submit</button>
@@ -132,6 +140,7 @@ const Register = () => {
           </Form>
         )}
       </Formik>
+      {contextHolder}
     </div>)
 }
 
