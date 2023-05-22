@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
-import { Button, message, Switch } from 'antd';
+import { Button, message, Switch,EyeFilled } from 'antd';
+import showHidePassword from '@/components/ShowHidePassword';
 
 import styles from './Register.module.css';
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +20,9 @@ const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
-  role: Yup.string(),
+  confirmPassword: Yup.string().required()
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+  
 
 });
 
@@ -91,20 +94,29 @@ const Register = () => {
 
          
             <div className={styles.switch_user}>
-            <Field name="fullName" placeholder="Full Name" className={styles.Home_input} />
+            <Field name="fullName" placeholder="Full Name" className={styles.Home_input}
+            />
               {errors.fullName && touched.fullName ? (
-                <div>{errors.fullName}</div>
+                <div className={styles.error}>{errors.fullName}</div>
               ) : null}
                 <Field name="phoneNumber" placeholder="Phone Number" className={styles.Home_input} />
-              {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
+              {errors.phoneNumber && touched.phoneNumber ? <div className={styles.error}>{errors.phoneNumber}</div> : null}
 
-              <Field name="password" placeholder="Password" className={styles.Home_input} />
+              <Field name="password"
+               placeholder="Password" 
+               component={showHidePassword}
+               
+                />
+
               {errors.password && touched.password ? (
                 <div>{errors.password}</div>
               ) : null}
-              <Field name="confirmPassword" placeholder="Confirm password" className={styles.Home_input} />
+              <Field name="confirmPassword" 
+              placeholder="Confirm password"
+              component={showHidePassword} 
+               />
               {errors.confirmPassword && touched.confirmPassword ? (
-                <div>{errors.confirmPassword}</div>
+                <div className={styles.error}>{errors.confirmPassword}</div>
               ) : null}
               <div>
                 <Switch 
@@ -116,9 +128,9 @@ const Register = () => {
               {isRider &&  (
                 <div>
                   <Field name="licenseNumber" placeholder="License No" className={styles.Home_input} />
-                  {errors.licenseNumber && touched.licenseNumber ? <div>{errors.licenseNumber}</div> : null}
+                  {errors.licenseNumber && touched.licenseNumber ? <div className={styles.error}>{errors.licenseNumber}</div> : null}
                   <Field name="vehicleNumber" placeholder="Vehicle Number" className={styles.Home_input} />
-                  {errors.vehicleNumber && touched.vehicleNumber ? <div>{errors.vehicleNumber}</div> : null}
+                  {errors.vehicleNumber && touched.vehicleNumber ? <div className={styles.error}>{errors.vehicleNumber}</div> : null}
                   <Field
                     name="vehicleType"
                     className={styles.Home_select}
@@ -130,7 +142,7 @@ const Register = () => {
                     <option value="car">Car</option>
                     <option value="motorcycle">Motorcycle</option>
                   </Field>
-                  {errors.vehicleType && touched.vehicleType ? <div>{errors.vehicleType}</div> : null}
+                  {errors.vehicleType && touched.vehicleType ? <div className={styles.error}>{errors.vehicleType}</div> : null}
                   </div>
               )}
             </div>

@@ -88,7 +88,7 @@
 }
 
 .switch_user {
-    font-size: 22px;
+    /* font-size: 22px; */
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
@@ -96,9 +96,10 @@
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.switch_user > div {
-  display: flex;
-  align-items: center;
+.switch_user > .error {
+  color: red;
+  /* display: flex; */
+  /* align-items: center; */
 }
 
 .switch_user span {
@@ -118,7 +119,6 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 
 
 
