@@ -3,11 +3,14 @@ import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, LoadScript,MarkerF, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationSlice'
+import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
 const Home = ()=> {
   const dispatch = useDispatch()
   const {role} =useSelector(state=> state.user)
   const {pickUpCoords, pickUpAddress} =useSelector(state=> state.location)
+  const {destinationCoords, destinationAddress} = useSelector(state=>state.location)
   const [pickupInputField, setPickUpInputField] = useState('')
+  const [destinationInputField, setDestinationInputField] = useState('')
  
   const { isLoaded, loadError } = useJsApiLoader({
     libraries: ['places'],
@@ -24,6 +27,8 @@ const Home = ()=> {
     lng: 85.3466481712005
   };
 
+  
+
 
   
   const onLoad = marker => {
@@ -39,7 +44,23 @@ const Home = ()=> {
     fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
     .then(res=> res.json())
     .then(data=> dispatch(setPickUpAddr(data.features[0].properties.formatted)))
+
+    dispatch(setDestinationCoords(latLngObj))
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+    .then(res=> res.json())
+    .then(data=> dispatch(setDestinationAddr (data.features[0].properties.formatted)))
   }
+
+  /*const destinationLocation = (val)=> {
+    const latLngObj = {
+      lat: val.latLng.lat(),
+      lng: val.latLng.lng(),
+    }
+    dispatch(setDestinationCoords(latLngObj))
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+    .then(res=> res.json())
+    .then(data=> dispatch(setDestinationAddr(data.features[0].properties.formatted)))
+  } */
 
     return (
         <div style={{textAlign:'center'}}>
@@ -54,7 +75,9 @@ const Home = ()=> {
                 <input 
                 value={pickupInputField}
                 
-                placeholder="enter pick up location" onChange={(e)=>setPickUpInputField(e.target.value)}/>
+                placeholder="enter pick up location" onChange={(e)=>setPickUpInputField(e.target.value)}
+                />
+    
               </Autocomplete>
               <GoogleMap
                 mapContainerStyle={containerStyle}
@@ -66,13 +89,23 @@ const Home = ()=> {
                     onDragEnd= {assignLocation}
                     draggable= {true}
                     position= {pickUpCoords}
+                    fillColor= "green"
                   />
-                   <MarkerF
-                    onLoad={onLoad}
-                    onDragEnd= {assignLocation}
-                    draggable= {true}
-                    position= {pickUpCoords}
-                  />
+                     <MarkerF
+                     onLoad={onLoad}
+                     onDragEnd={assignLocation}
+                     draggable= {true}
+                     position={destinationCoords}
+                      icon={{
+                    path:"M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
+                     fillColor: "green",
+                    fillOpacity: 0.9,
+                      scale: 2,
+                       strokeColor: "gold",
+                      strokeWeight: 8,
+                          }}
+                        
+                           />
                 { /* Child components, such as markers, info windows, etc. */ }
                 <></>
               </GoogleMap>
@@ -81,6 +114,10 @@ const Home = ()=> {
           ) : "Loading ...."}
           Your pickup address is:  {pickUpAddress}
           <button >Confirm pickup address</button>
+          <br/>
+
+          Your destination address is: {destinationAddress}
+          <button>Confirm destination address</button>
 
            </div>
     )
