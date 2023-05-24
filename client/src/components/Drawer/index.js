@@ -67,18 +67,11 @@ const CustomDrawer = (props) => {
       {/* Your other navbar contents */}
                   
       <div className="navbar-center"  >
-      <LoadScript
-        googleMapsApiKey="YOUR_API_KEY"
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-        >
-          { /* Child components, such as markers, info windows, etc. */ }
-          <></>
-        </GoogleMap>
-      </LoadScript>
+        <Dropdown overlay={menu} placement="bottomRight">
+            <Image src={'http://localhost:4000/avatar/'+id} width={100} height={100} alt="avatar"/>
+          {/* <Button shape="circle" size='large' icon={<UserOutlined />} /> */}
+        </Dropdown>
+        Hello <b>{role} </b>
       </div>
     </header>
         }
