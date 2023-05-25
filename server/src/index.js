@@ -5,7 +5,7 @@ const userRoute = require('./routes/user')
 
 const app = express()
 require('dotenv').config()
-const port = process.env.PORT
+const port = process.env.PORT || 4000
 dbConnect()
 app.use(express.json({limit:'50mb'}))
 
