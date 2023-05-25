@@ -1,0 +1,266 @@
+/* Form css for login and register*/
+
+.main {
+  width: 100%;
+  background-image: url("https://iso.500px.com/wp-content/uploads/2022/07/Sunset-somewhere-in-Iowa-By-Vath.-Sok-2.jpeg");
+background-color: #cccccc;
+height: 99vh;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: fixed;
+margin: -8px;
+padding-bottom: 7px;
+box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+/* nav bar */
+.nav {
+  width: 108%;
+  height: 50px;
+  background-color: #4CB944;
+  position: relative;
+  margin-top: -8px;
+  margin-left: -8px;
+}
+
+.navTitle {
+  color: #cfc1c1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 35px;
+  position: absolute;
+  top: 0px;
+  left: -20px;
+  margin-top: 13px;
+  margin-left: 46px;
+
+}
+
+/* Logo */
+.logo-div {
+  width: 100%;
+  height: 38px;
+  text-align: center;
+ 
+ 
+  
+}
+
+.logo {
+  margin-top: 0px;
+  display: inline-block;
+}
+
+.logoQ {
+  color: #4cb944;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.logoMart {
+  color: #0F65D2;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Form */
+.formTitle {
+  font-size: 26px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 3px;
+  margin-bottom: 15px;
+  color: floralwhite;
+}
+
+.formLabel {
+  font-weight: 600;
+  font-size: small;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form {
+  margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    width: 320px;
+    padding: 80px;
+    background-color: rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid lightgray;
+ 
+}
+
+.input {
+  width: 300px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid darkgray;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.passwordHint {
+  font-size: 10px;
+  margin-top: -5px;
+  margin-left: 2px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid #4caf50;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 10px;
+  margin-top: -5px;
+  margin-left: 2px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* login & Regiter button */
+.loginRegisterButton {
+  width: 100%;
+  padding: 10px;
+  line-height: 15spx;
+  background-color: #4cb944;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
+.loginRegisterButton:hover {
+  background-color: #4ec746;
+}
+
+.signinSignupHint {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Below form */
+.createAccountContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  width: 320px;
+  padding: 15px;
+  border-radius: 4px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.createAccountButton {
+  width: 100%;
+  line-height: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
+.createAccountButton:hover {
+  background-color: #e2e9e2;
+  text-align: center;
+}
+
+/* fading divider line */
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), #ccc),
+    linear-gradient(to right, rgba(255, 255, 255, 0), #ccc);
+}
+
+.registerHint {
+  font-size: 14px;
+  color: #f7f7f7;
+
+}
+
+.loginRegisterButton:hover {
+  background-color: #4ec746;
+}
+
+
+.signinSignupHint {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+/* Below form */
+.createAccountContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  width: 320px;
+  padding: 15px;
+  border-radius: 4px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.createAccountButton {
+  width: 100%;
+  line-height: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
+.createAccountButton:hover {
+  background-color: #e2e9e2;
+  text-align: center;
+
+}
+
+/* fading divider line */
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), #ccc), linear-gradient(to right, rgba(255, 255, 255, 0), #ccc);
+}
+
+
+.logoGantabya{
+ 
+  top: 21%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.imageLogo{
+  width: 110px;
+  height: 116px;
+  border-radius: 100px;
+  position: absolute;
+  top: -154px;
+  left: calc(50% - 48px);
+}
