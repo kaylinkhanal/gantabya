@@ -33,7 +33,7 @@ const Main = () => {
   }
   return (
     <div>
-      {/* {role ? <CustomDrawer/>: null } */}
+      {role ? <CustomDrawer/>: null }
       {token ? <Dashboard/> : <Auth/>}
     </div>
   )
