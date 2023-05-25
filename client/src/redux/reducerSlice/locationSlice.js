@@ -6,11 +6,11 @@ const initialState = {
     lng: 85.3466481712005
   },
   destinationCoords: {
-    lat: 27.690551245186235,
-    lng: 85.3466481712005
+    lat: 27.6909512831845865,
+    lng: 85.3496484712045
   },
   pickUpAddress: '',
-  destinationAdddress: ''
+  destinationAddress: ''
 };
 
 export const locationSlice = createSlice({
@@ -31,14 +31,25 @@ export const locationSlice = createSlice({
         pickUpAddress: action.payload
       }
     },
+    
     setDestinationCoords:  (state, action) => {
-       
+      return{
+        ...state,
+        destinationCoords:action.payload
+      }  
      },
-  },
+     setDestinationAddr : (state, action) => {
+
+      return {
+        ...state,
+        destinationAddress: action.payload
+      }
+    },
+  }
 });
 
 
 
 
-export const { setPickUpCoords, setDestinationCoords, setPickUpAddr} = locationSlice.actions;
+export const { setPickUpCoords, setDestinationCoords, setPickUpAddr, setdestinationAddr} = locationSlice.actions;
 export default locationSlice.reducer;

@@ -20,6 +20,15 @@ const SignupSchema = Yup.object().shape({
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
   role: Yup.string(),
+  licenseNumber: Yup.string()
+  .min(2, "Too Short!")
+  .max(50, "Too Long!")
+  .required("Required"),
+vehicleNumber: Yup.string()
+  .min(2, "Too Short!")
+  .max(50, "Too Long!")
+  .required("Required"),
+vehicleType: Yup.string().required("Required"),
 
 });
 
@@ -100,10 +109,10 @@ const Register = () => {
               ) : null}
               <div>
                 <Switch 
-                defaultChecked={true} 
-                style={{backgroundColor:isRider? 'blue':'red'}}
+                defaultChecked={false} 
+                style={{backgroundColor:isRider? 'blue':'#795f5f'}}
                 onChange={switchRider} />
-                <span>Rider</span>
+                <span style={{color:'black'}}>Rider</span>
               </div>
               {isRider ? (
                 <div>

@@ -71,11 +71,12 @@ const Login  = ()=>{
           >
   
             {({ errors, touched }) => (
+             
               <Form className={styles.form}>
                 <p className={styles.formTitle}>Sign in</p>
-                <div className={styles.logoGantabya}>
+                <span className={styles.imageLogo}>
               <img src="https://user-images.githubusercontent.com/110533553/236834215-fa6b3214-ae99-4f98-804e-67c0d4abf9bd.png" className={styles.imageLogo}/>
-            </div>
+            </span>
                 <label htmlFor="phoneNumber" className={styles.formLabel}>Phone Number</label>
                 <Field name="phoneNumber" className={styles.input} />
                 {errors.phoneNumber && touched.phoneNumber ? <div className={styles.errorMessage}>{errors.phoneNumber}</div> : null}
@@ -88,6 +89,7 @@ const Login  = ()=>{
                   Continue
                 </button>
               </Form>
+              
             )}
           </Formik>
           {contextHolder}
