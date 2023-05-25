@@ -99,6 +99,7 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 .switch_user > div {
   display: flex;
   align-items: center;
+  color: red;
 }
 
 .switch_user span {
@@ -118,6 +119,8 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+
 
 
 
