@@ -20,17 +20,9 @@ const SignupSchema = Yup.object().shape({
     .matches(/^\d{10}$/, 'Phone number must be 10 digits')
     .required('Required'),
   role: Yup.string(),
-  licenseNumber: Yup.string()
-  .min(2, "Too Short!")
-  .max(50, "Too Long!")
-  .required("Required"),
-vehicleNumber: Yup.string()
-  .min(2, "Too Short!")
-  .max(50, "Too Long!")
-  .required("Required"),
-vehicleType: Yup.string().required("Required"),
+  
 
-});
+})
 
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -94,18 +86,18 @@ const Register = () => {
             <div className={styles.switch_user}>
             <Field name="fullName" placeholder="Full Name" className={styles.Home_input} />
               {errors.fullName && touched.fullName ? (
-                <div>{errors.fullName}</div>
+                <div className={styles.required}>{errors.fullName}</div>
               ) : null}
                 <Field name="phoneNumber" placeholder="Phone Number" className={styles.Home_input} />
-              {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
+              {errors.phoneNumber && touched.phoneNumber ? <div className={styles.required}>{errors.phoneNumber}</div> : null}
 
               <Field name="password" placeholder="Password" className={styles.Home_input} />
               {errors.password && touched.password ? (
-                <div>{errors.password}</div>
+                <div className={styles.required}>{errors.password}</div>
               ) : null}
               <Field name="confirmPassword" placeholder="Confirm password" className={styles.Home_input} />
               {errors.confirmPassword && touched.confirmPassword ? (
-                <div>{errors.confirmPassword}</div>
+                <div className={styles.required}>{errors.confirmPassword}</div>
               ) : null}
               <div>
                 <Switch 
@@ -115,11 +107,11 @@ const Register = () => {
                 <span style={{color:'black'}}>Rider</span>
               </div>
               {isRider ? (
-                <div>
+                <>
                   <Field name="licenseNumber" placeholder="License No" className={styles.Home_input} />
-                  {errors.licenseNumber && touched.licenseNumber ? <div>{errors.licenseNumber}</div> : null}
+                  {errors.licenseNumber && touched.licenseNumber ? <div className={styles.required}>{errors.licenseNumber}</div> : null}
                   <Field name="vehicleNumber" placeholder="Vehicle Number" className={styles.Home_input} />
-                  {errors.vehicleNumber && touched.vehicleNumber ? <div>{errors.vehicleNumber}</div> : null}
+                  {errors.vehicleNumber && touched.vehicleNumber ? <div className={styles.required}>{errors.vehicleNumber}</div> : null}
                   <Field
                     name="vehicleType"
                     className={styles.Home_select}
@@ -132,7 +124,7 @@ const Register = () => {
                     <option value="motorcycle">Motorcycle</option>
                   </Field>
                   {errors.vehicleType && touched.vehicleType ? <div>{errors.vehicleType}</div> : null}
-                  </div>
+                  </>
               ) : null}
             </div>
             <input type="file" onChange={handleFileSave}/>
