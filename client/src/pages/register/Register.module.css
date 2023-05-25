@@ -119,6 +119,10 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.required{
+  font-size:13px
+}
+
 
 
 
