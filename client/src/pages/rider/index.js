@@ -20,7 +20,7 @@ const Home = ()=> {
           <h1> Hello {role} </h1>
           {ridesList.length> 0 ? ridesList.map((item)=>{
             return( <div className="card" >
-              
+              <Card/>
               </div>)
           }) : null}
        
