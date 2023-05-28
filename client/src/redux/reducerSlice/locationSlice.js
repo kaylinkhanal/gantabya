@@ -51,5 +51,5 @@ export const locationSlice = createSlice({
 
 
 
-export const { setPickUpCoords, setDestinationCoords, setPickUpAddr, setdestinationAddr} = locationSlice.actions;
+export const { setPickUpCoords, setDestinationCoords, setPickUpAddr, setDestinationAddr} = locationSlice.actions;
 export default locationSlice.reducer;

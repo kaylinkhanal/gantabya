@@ -127,6 +127,21 @@ filter: brightness(50%);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.card {
+  width: 100%;
+  padding: 10px;
+  line-height: 15spx;
+  background-color: #4cb944;
+  color: white;
+  margin:30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 1px solid darkgray;
+}
+
 /* login & Regiter button */
 .loginRegisterButton {
   width: 100%;
