@@ -40,6 +40,7 @@ const Login  = ()=>{
       try {
         const res = await fetch('http://localhost:4000/login', requestOptions)
         const data = await res.json()
+     
         if (data.success) {
           message.success("login successful");
           dispatch(setUserDetails(data))
@@ -62,7 +63,6 @@ const Login  = ()=>{
     return (
         <>
         <div className={styles.main}>
-        
   
           <Formik
             initialValues={initialValues}

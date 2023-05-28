@@ -27,7 +27,7 @@ const registerUser= async (req, res) => {
         if (data) {
           res.json({
             msg: "Register success",
-            success: true
+            success: true,
           })
         }
       }

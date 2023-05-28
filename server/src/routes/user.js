@@ -7,7 +7,7 @@ const upload = require('../middleware/uploadMiddleware')
 const path = require('path')
 const fs =require('fs')
 const User =require('../controller/user')
-console.log(User)
+
 router.post('/register', upload, User.registerUser)
 
 router.post('/login', async (req, res) => {
@@ -16,7 +16,6 @@ router.post('/login', async (req, res) => {
   if (data) {
     //user cred match
     const isMatched = await bcrypt.compare(req.body.password, data.password)
-    console.log(isMatched)
     if (isMatched) {
       //generete the token for this matched user and send the token as reponse
       const token = jwt.sign({ phoneNumber: req.body.phoneNumber }, process.env.SECRET_KEY);
@@ -45,5 +44,13 @@ router.get('/avatar/:id', async (req, res) => {
 
 })
 
+
+router.get('/users',async (req, res) => {
+  const userData = await Users.find()
+  res.send({
+    userList: userData
+  })
+  
+})
 
 module.exports=router;

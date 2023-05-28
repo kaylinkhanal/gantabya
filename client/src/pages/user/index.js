@@ -6,10 +6,10 @@ import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationS
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
 const Home = ()=> {
   const dispatch = useDispatch()
-  const {role} =useSelector(state=> state.user)
+  const {role,id} =useSelector(state=> state.user)
   const inputRef = useRef(null)
-  const {pickUpCoords, pickUpAddress} =useSelector(state=> state.location)
-  const {destinationCoords, destinationAddress} = useSelector(state=>state.location)
+  const {pickUpCoords, pickUpAddress, destinationCoords, destinationAddress} =useSelector(state=> state.location)
+
   const [pickupInputField, setPickUpInputField] = useState('')
   const [destinationInputField, setDestinationInputField] = useState('')
  
@@ -19,8 +19,8 @@ const Home = ()=> {
   })
 
   const containerStyle = {
-    width: '400px',
-    height: '400px'
+    width: '100vw',
+    height: '100vh'
   };
 
   const center = {
@@ -36,7 +36,7 @@ const Home = ()=> {
     console.log('marker: ', marker)
   }
 
-  const assignLocation = (val)=> {
+  const assignPickUpLocation = (val)=> {
     const latLngObj = {
       lat: val.latLng.lat(),
       lng: val.latLng.lng(),
@@ -45,18 +45,17 @@ const Home = ()=> {
     fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
     .then(res=> res.json())
     .then(data=> dispatch(setPickUpAddr(data.features[0].properties.formatted)))
-
-    dispatch(setDestinationCoords(latLngObj))
-    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
-    .then(res=> res.json())
-    .then(data=> dispatch(setDestinationAddr(data.features[0].properties.formatted)))
   }
+
+
+
 
   const selectLocation = ()=>{ 
     dispatch(setPickUpAddr(inputRef?.current.value))
   }
 
-  /*const destinationLocation = (val)=> {
+  const assignDestinationLocation = (val)=> {
+    debugger;
     const latLngObj = {
       lat: val.latLng.lat(),
       lng: val.latLng.lng(),
@@ -64,10 +63,27 @@ const Home = ()=> {
     dispatch(setDestinationCoords(latLngObj))
     fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${val.latLng.lat()}&lon=${val.latLng.lng()}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
     .then(res=> res.json())
-    .then(data=> dispatch(setDestinationAddr(data.features[0].properties.formatted)))
-  } */
+    .then(data=> dispatch(setDestinationAddr(data?.features[0]?.properties?.formatted)))
+  } 
 
- 
+
+  const sendPickupRequest = async()=> {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
+    };
+    try {
+      const res = await fetch('http://localhost:4000/rides', requestOptions)
+      const data = await res.json()
+      if(data){
+        alert("your pickup request is submitted")
+      }
+  }catch(err){
+    alert("sth went wrong")
+  }
+
+}
   
   
     return (
@@ -86,6 +102,9 @@ const Home = ()=> {
                 />
     
               </Autocomplete>
+              <button onClick={sendPickupRequest}>
+                Send pickup request
+                </button>
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -93,7 +112,7 @@ const Home = ()=> {
               >
                   <MarkerF
                     onLoad={onLoad}
-                    onDragEnd= {assignLocation}
+                    onDragEnd= {assignPickUpLocation}
                     draggable= {true}
                     position= {pickUpCoords}
                   />
@@ -102,8 +121,8 @@ const Home = ()=> {
                      
                      <MarkerF
                      onLoad={onLoad}
-         
                      draggable= {true}
+                     onDragEnd={assignDestinationLocation}
                      position={destinationCoords}
                       icon={{
                     path:"M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
@@ -113,7 +132,6 @@ const Home = ()=> {
                        strokeColor: "gold",
                       strokeWeight: 8,
                           }}
-                        
                            />
                 { /* Child components, such as markers, info windows, etc. */ }
                 <></>

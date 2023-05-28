@@ -4,7 +4,6 @@ const Navbar =()=> {
     return(
         <>
         <div className={styles.nav}>
-        <CutomDrawer/>
         </div>
         <div>
          
