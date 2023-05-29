@@ -1,14 +1,12 @@
 import { Card } from 'antd';
-const CustomCard = () => {
+import styles from '@/styles/Home.module.css'
 
+const CustomCard = (props) => {
  return(
-    <Card
-        title="Card title"
-        style={{
-        width: 300,
-        }}
-    >
-        <p>Card content</p>
-    </Card>
+    <div className={styles.card} >
+               {props.item.destinationAddress}
+               {props.item.pickupAddres}
+               {props.item.status}
+              </div>
 )}
 export default CustomCard;

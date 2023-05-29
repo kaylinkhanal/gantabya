@@ -100,7 +100,6 @@ const Home = ()=> {
                 ref={inputRef}
                 placeholder="enter pick up location" onChange={(e)=> dispatch(setPickUpAddr(e.target.value))}
                 />
-    
               </Autocomplete>
               <button onClick={sendPickupRequest}>
                 Send pickup request

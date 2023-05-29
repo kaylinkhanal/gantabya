@@ -128,17 +128,13 @@ filter: brightness(50%);
 }
 
 .card {
-  width: 100%;
-  padding: 10px;
+  width: 30%;
+  height: 130px;
+  padding: 14px;
   line-height: 15spx;
   background-color: #4cb944;
   color: white;
-  margin:30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin:10px;
   border: 1px solid darkgray;
 }
 
