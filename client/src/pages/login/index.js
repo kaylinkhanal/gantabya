@@ -7,6 +7,7 @@ import { useFormik, Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'
 import { useRouter } from "next/router";
 import { Button, message } from 'antd';
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 const initialValues = {
     phoneNumber: '',
     password: ''
@@ -27,9 +28,13 @@ const Login  = ()=>{
     const router = useRouter();
     const [phoneNumber, setPhoneNumber] = useState('')
     const [password, setPassword] = useState('')
+    const [open, setOpen] = useState(false);
   
     const dispatch = useDispatch()
     const { token } = useSelector(state => state.user)
+    const toggle = () => {
+      setOpen(!open);
+    };
   
     const handleLogin = async (values) => {
       const requestOptions = {
@@ -82,7 +87,14 @@ const Login  = ()=>{
                 {errors.phoneNumber && touched.phoneNumber ? <div className={styles.errorMessage}>{errors.phoneNumber}</div> : null}
   
                 <label htmlFor="password" className={styles.formLabel}>Password</label>
-                <Field name="password" type="password" placeholder="At least 6 character" className={styles.input} />
+                <Field name="password" type={open == false ? "password" : "text"} placeholder="At least 6 character" className={styles.input} />
+                <div className={styles.showpass}>
+                {open == false ? (
+                  <AiFillEyeInvisible onClick={toggle} />
+                ) : (
+                  <AiFillEye onClick={toggle} />
+                )}
+              </div>
                 {errors.password && touched.password ? <div className={styles.errorMessage}>{errors.password}</div> : null}
   
                 <button type="submit" className={styles.loginRegisterButton}>
