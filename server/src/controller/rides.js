@@ -9,7 +9,7 @@ const addNewRide = async (req, res) => {
   }
 
   const getAllRides = async (req, res) => {
-    const data = await Rides.find({status: req.query.status}).skip((req.query.page-1 )* 2).limit(2)
+    const data = await Rides.find({status: req.query.status}).skip((req.query.page-1 )* 5).limit(5)
     res.json({
       ridesList:data
     })

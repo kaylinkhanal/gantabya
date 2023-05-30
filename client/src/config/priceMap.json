@@ -1,0 +1,10 @@
+{
+    "car": {
+        "basePrice": 200,
+        "unitKmPrice": 100
+    },
+    "bike": {
+        "basePrice": 30,
+        "unitKmPrice": 50
+    }
+}

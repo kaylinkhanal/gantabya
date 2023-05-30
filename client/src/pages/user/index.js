@@ -1,18 +1,34 @@
-import {useState, useRef} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, LoadScript,MarkerF, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationSlice'
+import { getDistance } from 'geolib';
+import priceMap from '../../config/priceMap.json'
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
 const Home = ()=> {
   const dispatch = useDispatch()
+  const [rideType, setRideType] = useState('bike')
+  const [price, setPrice] = useState(priceMap[rideType].basePrice)
+  const [distance, setDistance] = useState(0)
+
   const {role,id} =useSelector(state=> state.user)
   const inputRef = useRef(null)
   const {pickUpCoords, pickUpAddress, destinationCoords, destinationAddress} =useSelector(state=> state.location)
 
   const [pickupInputField, setPickUpInputField] = useState('')
   const [destinationInputField, setDestinationInputField] = useState('')
- 
+  useEffect(()=>{
+   const distance = getDistance(pickUpCoords,destinationCoords )/1000 
+   setDistance(distance)
+   const price = distance  * priceMap[rideType].unitKmPrice
+   if(price < priceMap[rideType].basePrice){
+    setPrice(priceMap[rideType].basePrice)
+   }else{
+    setPrice(price)
+   }
+   
+  },[pickUpCoords.lat, destinationCoords.lat, rideType])
   const { isLoaded, loadError } = useJsApiLoader({
     libraries: ['places'],
     googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0" 
@@ -66,6 +82,12 @@ const Home = ()=> {
     .then(data=> dispatch(setDestinationAddr(data?.features[0]?.properties?.formatted)))
   } 
 
+  const reducePrice= () => {
+    if(price - price*20/100 > priceMap[rideType].basePrice){
+      setPrice(price- 1)
+    }
+  }
+
 
   const sendPickupRequest = async()=> {
     const requestOptions = {
@@ -88,9 +110,18 @@ const Home = ()=> {
   
     return (
         <div style={{textAlign:'center'}}>
+          price is <button onClick={()=>setPrice(price+1)}>+</button>{price}<button onClick={reducePrice}>-</button>
+          distance is {distance}
+          <button onClick={()=>setRideType('car')}
+            style={{background: rideType=='car' ? 'blue' : null}}
+          >Car</button>
+          <button onClick={()=>setRideType('bike')}
+             style={{background: rideType=='bike' ? 'blue' : null}}
+          >Bike</button>
+
           {isLoaded ? (
               <div>
-                
+               
               <Autocomplete
                key={1}
                onPlaceChanged= {(val)=> selectLocation()}
