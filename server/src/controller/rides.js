@@ -14,9 +14,17 @@ const addNewRide = async (req, res) => {
       ridesList:data
     })
    }
+
+  const getRidesById=async (req, res) => {
+    const data = await Rides.findById(req.params.id)
+    res.json({
+      ridesList:data
+    })
+   }
   
 
   module.exports = {
     addNewRide,
-    getAllRides
+    getAllRides,
+    getRidesById
     }
