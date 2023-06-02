@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, LoadScript,MarkerF, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationSlice'
 import { getDistance } from 'geolib';
+import { io } from 'socket.io-client';
 import priceMap from '../../config/priceMap.json'
+const socket = io('http://localhost:4000/');
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
 const Home = ()=> {
   const dispatch = useDispatch()
@@ -18,6 +20,10 @@ const Home = ()=> {
 
   const [pickupInputField, setPickUpInputField] = useState('')
   const [destinationInputField, setDestinationInputField] = useState('')
+
+  useEffect(()=>{
+    socket.on('connection')
+  },[])
   useEffect(()=>{
    const distance = getDistance(pickUpCoords,destinationCoords )/1000 
    setDistance(distance)
@@ -27,8 +33,9 @@ const Home = ()=> {
    }else{
     setPrice(price)
    }
-   
   },[pickUpCoords.lat, destinationCoords.lat, rideType])
+
+
   const { isLoaded, loadError } = useJsApiLoader({
     libraries: ['places'],
     googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0" 
@@ -83,27 +90,31 @@ const Home = ()=> {
   } 
 
   const reducePrice= () => {
-    if(price - price*20/100 > priceMap[rideType].basePrice){
-      setPrice(price- 1)
+  
+    const newPrice = price-1
+    const percentageChange =(newPrice-priceMap[rideType].basePrice)/priceMap[rideType].basePrice * 100
+    if(percentageChange > -10){
+      setPrice(price-1)
     }
   }
 
 
   const sendPickupRequest = async()=> {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
-    };
-    try {
-      const res = await fetch('http://localhost:4000/rides', requestOptions)
-      const data = await res.json()
-      if(data){
-        alert("your pickup request is submitted")
-      }
-  }catch(err){
-    alert("sth went wrong")
-  }
+    socket.emit('messageRequest',{ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
+  //   };
+  //   try {
+  //     const res = await fetch('http://localhost:4000/rides', requestOptions)
+  //     const data = await res.json()
+  //     if(data){
+  //       alert("your pickup request is submitted")
+  //     }
+  // }catch(err){
+  //   alert("sth went wrong")
+  // }
 
 }
   

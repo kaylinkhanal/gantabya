@@ -26,15 +26,10 @@ const Main = () => {
    
   }
 
-  const Auth = ()=> {
-    return (
-      <Login/>
-    )
-  }
   return (
     <div>
       {role ? <CustomDrawer/>: null }
-      {token ? <Dashboard/> : <Auth/>}
+      {token ? <Dashboard/> : <Login/>}
     </div>
   )
 }
