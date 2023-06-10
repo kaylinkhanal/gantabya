@@ -7,6 +7,7 @@ import { Button, message, Switch } from "antd";
 import styles from "./Register.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
+import UploadButton from "@/components/registerUpload";
 
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -213,8 +214,10 @@ const Register = () => {
                   ) : null}
                 </>
               ) : null}
+                   
             </div>
-            <input type="file" onChange={handleFileSave} />
+       
+            <UploadButton onChange={handleFileSave}/>
             <button type="submit" className={styles.submitButton}>
               Submit
             </button>
