@@ -1,11 +1,9 @@
 .Home_form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 1rem;
   border: 1px solid #ccc;
   width: 400px;
-
   border-radius: 5%;
 }
 
@@ -27,6 +25,7 @@
   margin-bottom: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .Home_button {
   background-color: #0070f3;
   color: #fff;
@@ -36,6 +35,7 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
 .toggleContainer {
   display: flex;
   align-items: center;
@@ -69,6 +69,7 @@
   border: 2px solid orange;
   border-radius: 4px;
 }
+
 .submitButton {
   width: 100%;
   padding: 10px;
@@ -88,15 +89,15 @@
 }
 
 .switch_user {
-    font-size: 22px;
+  font-size: 22px;
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.switch_user > div {
+.switch_user>div {
   display: flex;
   align-items: center;
   color: red;
@@ -119,20 +120,13 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.required{
-  font-size:13px
+
+.required {
+  font-size: 13px
 }
-.showpass_register{
+
+.showpass_register {
   position: relative;
   left: 78%;
   top: -48px;
 }
-
-
-
-
-
-
-
-
-

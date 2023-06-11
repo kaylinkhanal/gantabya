@@ -1,0 +1,83 @@
+
+
+.container {
+    position: relative;
+}
+
+.image {
+    margin-left: 200px;
+}
+
+.formContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.form {
+    background-color: #E9F4F5;
+    padding: 20px 50px;
+    height: 500px;
+    width: 540px;
+    margin-top: 70px;
+    margin-left: 1000px;
+    box-sizing: border-box;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.input {
+    margin-top: 10px;
+    width: 70% !important;
+}
+
+.buttonLogin {
+    width: 100% !important;
+}
+
+.buttonLogin:hover {
+    border-color: rgb(119, 116, 116) !important;
+    color: black !important;
+}
+
+.buttonLogin:active {
+    background-color: rgb(59, 58, 58);
+}
+
+.buttonSignup {
+    background-color: black !important;
+    color: white !important;
+    width: 150px;
+}
+
+.buttonSignup:hover {
+    background-color: rgb(59, 58, 58) !important;
+}
+
+.subtitle {
+    font-size: 40px;
+}
+
+.footer {
+    width: 100%;
+    height: 192px;
+    background-color: #E9F4F5;
+    position: absolute;
+    bottom: 0;
+}
+
+.footerContent {
+    margin-left: 400px;
+    margin-top: 0px;
+    position: absolute;
+    top: 40px;
+}
+
+.errorMessage {
+    color: red;
+}
