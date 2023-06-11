@@ -33,7 +33,32 @@ const registerUser= async (req, res) => {
       }
     }
   }
-
+  const PutChangePassword = async (req, res) => {
+    try {
+      const user = await Users.findOne({ _id: req.params.id })
+      if (user) {
+        const { password } = user;
+        const isMatched = bcrypt.compareSync(req.body.currentPassword, password);
+        if (isMatched) {
+          const hash = await bcrypt.hashSync(req.body.newPassword, 10);
+          user.password = hash;
+          const data = await Users.findByIdAndUpdate(user._id, user);
+          if (data) {
+            res.status(200).json({ msg: "Password has changed" })
+          }
+          else {
+            res.status(500).json({ msg: "something went wrong" })
+          }
+        } else {
+          res.status(500).json({ msg: "Current password does not matched" })
+        }
+      }
+  
+    } catch (err) {
+      console.log(err);
+    }
+  };
   module.exports = {
-      registerUser
+      registerUser,
+      PutChangePassword
     }

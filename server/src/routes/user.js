@@ -7,7 +7,7 @@ const uploadMiddleware = require('../middleware/uploadMiddleware')
 const path = require('path')
 const fs =require('fs')
 const User =require('../controller/user')
-
+router.put('/changePassword/:id',User.PutChangePassword)
 router.post('/register', uploadMiddleware, User.registerUser)
 
 router.post('/login', async (req, res) => {

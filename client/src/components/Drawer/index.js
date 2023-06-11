@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button, Drawer,Dropdown, Menu } from 'antd';
 import { MenuOutlined, UserOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import navItems from '../../config/navItems.json'
-import { Avatar, List } from 'antd';
+import { Avatar,Modal, List } from 'antd';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
+import AccountingSettings from '@/pages/Auth/changePassword';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import Image from 'next/image';
@@ -38,10 +38,11 @@ const CustomDrawer = (props) => {
   const onClose = () => {
     setVisible(false);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const menu = (
     <Menu>
         <Menu.Item key="changePassword" icon={<LockOutlined />}>
-          Change Password
+      <p onClick={() => setIsModalOpen(true)}>Change Password </p>
         </Menu.Item>
         <Menu.Item onClick={handleLogout} icon={<LogoutOutlined />}>
           Logout
@@ -92,6 +93,13 @@ const CustomDrawer = (props) => {
   />
       
       </Drawer>
+      <Modal
+                footer={null}
+                onCancel={() => setIsModalOpen(false)}
+                open={isModalOpen}>
+                 <AccountingSettings/>
+
+       </Modal>
     </>
   );
 };
