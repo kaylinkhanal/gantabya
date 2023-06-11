@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Button, Drawer,Dropdown, Menu } from 'antd';
 import { MenuOutlined, UserOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import navItems from '../../config/navItems.json'
+import { Avatar,Modal, List } from 'antd';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
+import AccountingSettings from '@/pages/Auth/changePassword';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import Image from 'next/image';
@@ -37,10 +38,11 @@ const CustomDrawer = (props) => {
   const onClose = () => {
     setVisible(false);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const menu = (
     <Menu>
         <Menu.Item key="changePassword" icon={<LockOutlined />}>
-          Change Password
+      <p onClick={() => setIsModalOpen(true)}>Change Password </p>
         </Menu.Item>
         <Menu.Item onClick={handleLogout} icon={<LogoutOutlined />}>
           Logout
@@ -50,9 +52,10 @@ const CustomDrawer = (props) => {
 
   return (
     <>
-      <Button type="primary" onClick={showDrawer}>
+      <div style={{position:'absolute', marginTop:-6, zIndex:44}}><Button type="primary" onClick={showDrawer}>
         <MenuOutlined />
       </Button>
+      </div>
       <Drawer
         title="Chose Your Gantabya"
         placement="left"
@@ -76,11 +79,28 @@ const CustomDrawer = (props) => {
     </header>
         }
       >
-        {/* Drawer content */}
-            {navItems[role].navItem.map((item)=>{
-              return(<Link href={item.link}>{item.label}</Link>)
-            })}
+
+<List
+    itemLayout="horizontal"
+    dataSource={navItems[role].navItem}
+    renderItem={(item, index) => (
+      <List.Item>
+        <List.Item.Meta
+          avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />}
+          title={<Link href={item.link}>{item.label}</Link>}
+        />
+      </List.Item>
+    )}
+  />
+      
       </Drawer>
+      <Modal
+                footer={null}
+                onCancel={() => setIsModalOpen(false)}
+                open={isModalOpen}>
+                 <AccountingSettings/>
+
+       </Modal>
     </>
   );
 };

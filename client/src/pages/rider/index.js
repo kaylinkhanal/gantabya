@@ -23,8 +23,8 @@ const Home = ()=> {
   },[])
 
   useEffect(()=>{
-    socket.on('messageRequest', (message)=>{
-      console.log(message)
+    socket.on('rideRequest', (rideList)=>{
+      setRideList(rideList)
     })
   })
   const searchNewList =(e)=>{
