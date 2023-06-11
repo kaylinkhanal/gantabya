@@ -3,12 +3,12 @@ const router=express.Router()
 const Users = require('../model/users')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const upload = require('../middleware/uploadMiddleware')
+const uploadMiddleware = require('../middleware/uploadMiddleware')
 const path = require('path')
 const fs =require('fs')
 const User =require('../controller/user')
 
-router.post('/register', upload, User.registerUser)
+router.post('/register', uploadMiddleware, User.registerUser)
 
 router.post('/login', async (req, res) => {
   //user found in db?
@@ -33,14 +33,21 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/avatar/:id', async (req, res) => {
-  const userData = await Users.findById(req.params.id)
-  const userImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
-  const defaultImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
-  if(fs.existsSync(userImage)){
-    res.sendFile(userImage)
-  }else{
-    res.sendFile(defaultImage)
+  try{
+    const userData = await Users.findById(req.params.id)
+    if(userData){
+      const userImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
+      const defaultImage = path.join(__dirname, '../../uploads/avatar', userData.avatarName )
+      if(fs.existsSync(userImage)){
+        res.sendFile(userImage)
+      }else{
+        res.sendFile(defaultImage)
+      }
+    }
+  }catch(err){
+    console.log(err.message)
   }
+
 
 })
 

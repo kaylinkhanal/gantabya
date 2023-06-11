@@ -100,21 +100,22 @@ const Home = ()=> {
 
 
   const sendPickupRequest = async()=> {
-    socket.emit('messageRequest',{ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
-  //   };
-  //   try {
-  //     const res = await fetch('http://localhost:4000/rides', requestOptions)
-  //     const data = await res.json()
-  //     if(data){
-  //       alert("your pickup request is submitted")
-  //     }
-  // }catch(err){
-  //   alert("sth went wrong")
-  // }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role, distance, price  })
+    };
+    try {
+      const res = await fetch('http://localhost:4000/rides', requestOptions)
+      const data = await res.json()
+      if(data){
+        alert("your pickup request is submitted")
+      }
+  }catch(err){
+    alert("sth went wrong")
+  }
+    socket.emit('rideRequest',{ pickUpCoords, pickUpAddress, destinationCoords, destinationAddress, userId:id ,role  })
+
 
 }
   
