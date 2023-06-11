@@ -31,13 +31,9 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.user)
-  const toggle = () => {
-    setOpen(!open);
-  };
 
   const handleLogin = async (values) => {
     const requestOptions = {
