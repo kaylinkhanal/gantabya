@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Drawer,Dropdown, Menu } from 'antd';
 import { MenuOutlined, UserOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import navItems from '../../config/navItems.json'
+import { Avatar, List } from 'antd';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -76,10 +77,20 @@ const CustomDrawer = (props) => {
     </header>
         }
       >
-        {/* Drawer content */}
-            {navItems[role].navItem.map((item)=>{
-              return(<Link href={item.link}>{item.label}</Link>)
-            })}
+
+<List
+    itemLayout="horizontal"
+    dataSource={navItems[role].navItem}
+    renderItem={(item, index) => (
+      <List.Item>
+        <List.Item.Meta
+          avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />}
+          title={<Link href={item.link}>{item.label}</Link>}
+        />
+      </List.Item>
+    )}
+  />
+      
       </Drawer>
     </>
   );

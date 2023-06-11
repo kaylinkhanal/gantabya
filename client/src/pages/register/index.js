@@ -77,16 +77,22 @@ const Register = () => {
     try {
       const res = await fetch("http://localhost:4000/register", requestOptions);
      const data = await res.json()
-      console.log(data)
-      if (res&&data.success) {
-        message.success(data.msg);
-      } else {
-        message.error(data.msg);
-      }
-    } catch (err) {
-      messageApi.warning(data.msg);
-    }
-  };
+     console.log(data);
+     if (res && data.success) {
+       messageApi.success(data.msg);
+       router.push('/login');
+     } else {
+       
+       if (data.fileSizeError) {
+         messageApi.error('File size exceeds the allowed limit of 2MB.');
+       } else  {
+         messageApi.error('Only JPG, JPEG, PNG, BMP, WEBP, SVG, and GIF files are allowed.');
+       }
+     }
+   } catch (err) {
+     messageApi.warning('An error occurred while registering.');
+   }
+ };
 
   const switchRider = (checked) => {
     setisRider(checked);
@@ -221,7 +227,9 @@ const Register = () => {
             Already have an account? <Link href="/">Login</Link>
           </Form>
         )}
+
       </Formik>
+      {contextHolder}
     </div>
   );
 };
