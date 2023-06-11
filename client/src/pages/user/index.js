@@ -1,10 +1,13 @@
 import {useState, useEffect, useRef} from 'react';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { AiFillCar } from 'react-icons/ai';
+import {MdPedalBike } from 'react-icons/md';
 import { GoogleMap, LoadScript,MarkerF, useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationSlice'
 import { getDistance } from 'geolib';
 import { io } from 'socket.io-client';
+import { Avatar,Modal, Input,Button } from 'antd';
 import priceMap from '../../config/priceMap.json'
 const socket = io('http://localhost:4000/');
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
@@ -25,9 +28,15 @@ const Home = ()=> {
     socket.on('connection')
   },[])
   useEffect(()=>{
-   const distance = getDistance(pickUpCoords,destinationCoords )/1000 
+    // const distance = (getDistance(pickUpCoords, destinationCoords) / 1000).toFixed(2);
+    const distance = Math.ceil(getDistance(pickUpCoords, destinationCoords) / 1000);
+
+  //  const distance = getDistance(pickUpCoords,destinationCoords )/1000 
    setDistance(distance)
-   const price = distance  * priceMap[rideType].unitKmPrice
+  //  const price = distance  * priceMap[rideType].unitKmPrice
+  // const price = (distance * priceMap[rideType].unitKmPrice).toFixed(2);
+   const price = Math.ceil(distance * priceMap[rideType].unitKmPrice);
+
    if(price < priceMap[rideType].basePrice){
     setPrice(priceMap[rideType].basePrice)
    }else{
@@ -121,32 +130,63 @@ const Home = ()=> {
   
   
     return (
+        
         <div style={{textAlign:'center'}}>
-          price is <button onClick={()=>setPrice(price+1)}>+</button>{price}<button onClick={reducePrice}>-</button>
-          distance is {distance}
-          <button onClick={()=>setRideType('car')}
-            style={{background: rideType=='car' ? 'blue' : null}}
-          >Car</button>
-          <button onClick={()=>setRideType('bike')}
-             style={{background: rideType=='bike' ? 'blue' : null}}
-          >Bike</button>
-
+         
           {isLoaded ? (
               <div>
-               
-              <Autocomplete
+          
+                  <Autocomplete
                key={1}
                onPlaceChanged= {(val)=> selectLocation()}
               >
-                <input 
+              <div>
+               <div style={{
+                backgroundColor:'wheat', 
+                position:'absolute', 
+                zIndex:4, 
+                height:'auto',
+                width:'400px', 
+                marginLeft:'1250px', 
+                borderColor:'green',
+                border:'1px',
+                 borderRadius:'40px'}}> 
+         
+          
+           
+              
+                <h1> Choose Your Destination</h1>
+                <input style={{ height:'30px', width:'390px'}}
+                
                 value={pickUpAddress}
                 ref={inputRef}
-                placeholder="enter pick up location" onChange={(e)=> dispatch(setPickUpAddr(e.target.value))}
+                placeholder="Travelling From" onChange={(e)=> dispatch(setPickUpAddr(e.target.value))}
                 />
-              </Autocomplete>
-              <button onClick={sendPickupRequest}>
+                 <input style={{ height:'30px', width:'390px'}}
+                
+                value={destinationAddress}
+                
+                placeholder="Travelling To" onChange={(e)=> dispatch(setDestinationAddr(e.target.value))}
+                />
+                Choose Vehicles Types<br/>
+                
+                  <AiFillCar onClick={()=>setRideType('car')}
+                    style={{height:45,width:66, background: rideType=='car' ? 'blue' : null}} />
+                  
+                  <MdPedalBike className='avatar' onClick={()=>setRideType('bike')}
+                    style={{height:45,width:66, background: rideType=='bike' ? 'green' : null}}/>
+                    <hr/>
+                Estimated Price <Button onClick={()=>setPrice(price+1)}>+</Button>{price}<Button onClick={reducePrice}>-</Button>
+                <br/>  You are Travelling {distance} K.M
+                <hr/>
+                  <Button onClick={sendPickupRequest}>
                 Send pickup request
-                </button>
+                </Button> <br/>   
+                        
+                </div></div>
+              </Autocomplete>
+
+             
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -189,6 +229,7 @@ const Home = ()=> {
           <button>Confirm destination address</button>
 
            </div>
+          
     )
 }
 
