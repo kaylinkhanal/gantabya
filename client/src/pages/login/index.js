@@ -8,6 +8,8 @@ import { Button, message, Space, Input } from 'antd';
 import styles from './Login.module.css';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import Navbar from '@/components/Nav';
+import Image from 'next/image';
+import cover from './images/ride.jpg'
 const initialValues = {
   phoneNumber: '',
   password: ''
@@ -72,7 +74,7 @@ const Login = () => {
     <>
       <Navbar />
       <div className={styles.container}>
-        <img src="/images/ride.jpg" alt="no image" className={styles.image} />
+        <Image src={cover} alt="no image" className={styles.image} />
         <div className={styles.formContainer}>
           <Formik
             initialValues={initialValues}
