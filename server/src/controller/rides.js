@@ -12,8 +12,13 @@ const addNewRide = async (req, res) => {
     console.log(req.query)
     //only find rides address that starts with
     const totalCount = await Rides.find()
-    
-    const data = await Rides.find({status: req.query.status}).skip((req.query.page-1 )* 5).limit(5)
+    let data
+    if(req.query.id){
+      data = await Rides.find({status: req.query.status, userId:req.query.id}).skip((req.query.page-1 )* 5).limit(5)
+    }else{
+      data = await Rides.find({status: req.query.status}).skip((req.query.page-1 )* 5).limit(5)
+    }
+  
     if(data && totalCount){
     res.json({
       ridesList:data,

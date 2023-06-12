@@ -29,9 +29,20 @@ io.on("connection", (socket) => {
     const ridesList = await Rides.find()
     io.emit('rideRequest', ridesList)
   })
+
+
+  socket.on('changeRideStatus', async (changeRideStatusID)=>{
+   
+    const res = await Rides.findByIdAndUpdate(changeRideStatusID,{status:'success'})
+    if(res){
+      const ridesList = await Rides.find()
+      io.emit('rideRequest', ridesList)
+    }
+  })
   
 });
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
