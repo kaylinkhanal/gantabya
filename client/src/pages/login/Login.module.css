@@ -17,7 +17,7 @@
 }
 
 .input {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .buttonLogin {
@@ -28,4 +28,8 @@
     background-color: black !important;
     color: white !important;
     width: 100%;
+}
+
+.errorMessage {
+    color: red;
 }

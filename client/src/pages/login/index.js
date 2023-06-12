@@ -4,14 +4,12 @@ import { setUserDetails } from '../../redux/reducerSlice/userSlice'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 import { useRouter } from "next/router";
-import { Button, message, Space, Input, Tabs } from 'antd';
+import { Button, message, Space, Input } from 'antd';
 import styles from './Login.module.css';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import Navbar from '@/components/Nav';
 import Image from 'next/image';
-import cover from './images/ride.jpg';
-import Register from '../register';
-
+import cover from './images/ride.jpg'
 const initialValues = {
   phoneNumber: '',
   password: ''
@@ -21,13 +19,12 @@ const SigninSchema = Yup.object({
   phoneNumber: Yup.number()
     .typeError('must be a number')
     .test('checkLength', 'the number should exactly be 10 digits', val => val.toString().length == 10)
-    .required('Required'),
+    .required('required'),
   password: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
-    .required('Required'),
+    .required('required'),
 });
-
 const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const router = useRouter();
@@ -37,10 +34,6 @@ const Login = () => {
 
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.user)
-
-  const onChange = (key) => {
-    console.log(key);
-  };
 
   const handleLogin = async (values) => {
     const requestOptions = {
@@ -53,6 +46,7 @@ const Login = () => {
       const data = await res.json()
 
       if (data.success) {
+
         dispatch(setUserDetails(data))
       } else {
         message.error("login failed, try again");
@@ -71,86 +65,78 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  return (
 
-
-  const items = [
-    {
-      key: '1',
-      tab: `Login`,
-      content: (
-        <>
+    <>
+      <Navbar />
+      <div className={styles.container}>
+        <div className={styles.imageContainer}>
+          <Image src={cover} alt="no image" className={styles.image} />
+        </div>
+        <div className={styles.formContainer}>
           <Formik
             initialValues={initialValues}
             validationSchema={SigninSchema}
             onSubmit={handleLogin}
           >
+
             {({ errors, touched }) => (
               <Form className={styles.form}>
-                <div className={styles.input}>
-                  <Field
-                    as={Input}
-                    placeholder="Phone Number"
-                    name="phoneNumber"
-                    size="large"
-                  />
-                  <ErrorMessage name="phoneNumber" component="div" className={styles.errorMessage} />
+                <div>
+                  <strong className={styles.title}>Login</strong>
+                </div>
+                <div>
+                  <div className={styles.input}>
+                    <Field
+                      as={Input}
+                      placeholder="Phone Number"
+                      name="phoneNumber"
+                      size="large"
+                    />
+                    <ErrorMessage name="phoneNumber" component="div" className={styles.errorMessage} />
+                  </div>
+
+                  <div className={styles.input}>
+                    <Field
+                      as={Input.Password}
+                      placeholder="Password"
+                      name="password"
+                      size="large"
+                      iconRender={visible =>
+                        visible ? (
+                          <EyeOutlined onClick={handleTogglePassword} />
+                        ) : (
+                          <EyeInvisibleOutlined onClick={handleTogglePassword} />
+                        )
+                      }
+                    />
+                    <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+                  </div>
+
+                  <div className={styles.input}>
+                    <Button size='large' htmlType='submit' className={styles.buttonLogin}>Login</Button>
+                  </div>
+                  <br />
+                  <hr />
+                  <br />
+                  <div>
+                    <Space wrap>
+                      <Button size="large" className={styles.buttonSignup} onClick={handleCreateClick}>Sign up to drive</Button>
+                    </Space>
+                  </div>
                 </div>
 
-                <div className={styles.input}>
-                  <Field
-                    as={Input.Password}
-                    placeholder="Password"
-                    name="password"
-                    size="large"
-                    iconRender={visible =>
-                      visible ? (
-                        <EyeOutlined onClick={handleTogglePassword} />
-                      ) : (
-                        <EyeInvisibleOutlined onClick={handleTogglePassword} />
-                      )
-                    }
-                  />
-                  <ErrorMessage name="password" component="div" className={styles.errorMessage} />
-                </div>
-
-                <div className={styles.input}>
-                  <Button size='large' htmlType='submit' className={styles.buttonLogin}>Login</Button>
-                </div>
               </Form>
             )}
           </Formik>
-        </>
-      ),
-    },
-    {
-      key: '2',
-      tab: `Register`,
-      content: (
-        <>
-          <Register />
-        </>
-      ),
-    }
-  ];
-
-  return (
-    <>
-      <Navbar />
-      <div className={styles.container}>
-
-        <div className={styles.formContainer}>
-          <Tabs defaultActiveKey="1" onChange={onChange}>
-            {items.map(item => (
-              <Tabs.TabPane tab={item.tab} key={item.key}>
-                {item.content}
-              </Tabs.TabPane>
-            ))}
-          </Tabs>
           {contextHolder}
         </div>
-      </div>
+      </div >
+
+
     </>
+
+
   )
 }
-
-export default Login;
+export default Login

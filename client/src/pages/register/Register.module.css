@@ -1,30 +1,16 @@
 .Home_form {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  width: 400px;
-  border-radius: 5%;
+  width: 360px;
+  padding: 20px;
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-size: cover;
-  height: 100vh;
+  margin-top: 50px;
 }
 
-.Home_input {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid rgb(191, 26, 26);
-  font-size: 12px;
-  width: 80%;
-  margin-bottom: 1rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
 
 .Home_button {
   background-color: #0070f3;
@@ -47,10 +33,8 @@
 }
 
 .formTitle {
-  font-size: 26px;
+  font-size: 28px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin-top: 3px;
-  margin-bottom: 15px;
 }
 
 .formLabel {
@@ -72,21 +56,16 @@
 
 .submitButton {
   width: 100%;
-  padding: 10px;
-  line-height: 15spx;
-  background-color: #4cb944;
+  margin-bottom: 10px;
+  background-color: black;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  border: 1px solid darkgray;
 }
 
 .submitButton:hover {
-  background-color: #0069d9;
+  background-color: rgb(59, 58, 58);
+  color: white !important;
 }
+
 
 .switch_user {
   font-size: 22px;
@@ -100,33 +79,35 @@
 .switch_user>div {
   display: flex;
   align-items: center;
-  color: red;
 }
 
 .switch_user span {
   margin: 0 10px;
 }
 
-/* .ant-switch-checked {
-  background-color: #16e6a8;
-} */
 
 .Home_select {
-  width: 85%;
-  height: 40px;
-  font-size: 16px;
+  width: 100%;
+  font-size: 14px;
   padding: 10px;
-  margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
 .required {
-  font-size: 13px
+  font-size: 13px;
+  color: red;
 }
 
-.showpass_register {
-  position: relative;
-  left: 78%;
-  top: -48px;
+.Home_input {
+  margin-top: 15px;
+}
+
+.switchRider {
+  margin-top: 10px;
+}
+
+.filebtn {
+  margin-top: 20px;
 }
