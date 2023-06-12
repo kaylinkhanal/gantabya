@@ -10,9 +10,10 @@ const ridesSchema = new mongoose.Schema({
   },
   pickUpAddress: String,
   destinationAddress: String,
-  userId: String,
+  userId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
   riderId: String,
   price: Number,
+  distance: String,
   status: {type: String, default: 'pending'}
   },
   { timestamps: true }

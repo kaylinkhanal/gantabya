@@ -23,11 +23,12 @@ const addNewRide = async (req, res) => {
    }
 
   const getRidesById=async (req, res) => {
- 
-    const data = await Rides.findById(req.params.id)
+    const rideList = await Rides.findById(req.params.id).populate('userId')
+    if(rideList){
     res.json({
-      ridesList:data
+      rideList: rideList
     })
+    }
    }
   
 
