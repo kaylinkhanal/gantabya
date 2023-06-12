@@ -38,7 +38,7 @@ const Home = ()=> {
           {ridesList.length> 0 ? ridesList.map((item)=>{
             return( <Card item={item}/>)
           }) : <Skeleton />}
-          <Pagination defaultCurrent={0}   total={totalPage} pageSize={5} onChange={(page)=>fetchRides(page)}/>
+          <Pagination defaultCurrent={1}   total={totalPage} pageSize={5} onChange={(page)=>fetchRides(page)}/>
        
       </div>
     )

@@ -16,7 +16,7 @@ const io = socketio(server, {
   }
 });
 require('dotenv').config()
-const port = process.env.PORT 
+const port = process.env.PORT || 4000
 dbConnect()
 app.use(express.json({limit:'50mb'}))
 
