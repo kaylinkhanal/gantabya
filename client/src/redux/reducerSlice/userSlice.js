@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 //redux -> user: u
+
 const initialState = {
   token: '',
   role: '',
@@ -12,6 +13,7 @@ export const userSlice = createSlice({
   reducers: {
     setUserDetails: (state, action) => {
       const {token , role ,id } = action.payload
+    
       return {
         ...state,
         token, id, role

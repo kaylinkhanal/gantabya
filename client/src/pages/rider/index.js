@@ -6,8 +6,11 @@ import Card from '../../components/Card'
 import { Pagination } from 'antd';
 import { io } from 'socket.io-client';
 const socket = io('http://localhost:4000/');
+import { useRouter } from "next/router";
+
 
 const Home = ()=> { 
+  const router = useRouter();
   const [ridesList, setRideList] = useState([])
   const [totalPage, setTotalPage] = useState(0)
   const fetchRides = async(page=1, searchText)=>{
@@ -19,6 +22,7 @@ const Home = ()=> {
       }
   }
   useEffect(()=>{
+
     fetchRides()
   },[])
 
@@ -30,13 +34,14 @@ const Home = ()=> {
   const searchNewList =(e)=>{
     fetchRides(1, e.target.value)
   }
+  
   const {role} =useSelector(state=> state.user)
     return (
         <div style={{textAlign:'center'}}>
          <input placeholder="search rides" onChange={searchNewList}/>
           
           {ridesList.length> 0 ? ridesList.map((item)=>{
-            return( <Card item={item}/>)
+            return( <Card item={item} fetchRides={fetchRides}/>)
           }) : <Skeleton />}
           <Pagination defaultCurrent={1}   total={totalPage} pageSize={5} onChange={(page)=>fetchRides(page)}/>
        

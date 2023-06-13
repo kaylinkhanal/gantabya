@@ -12,12 +12,8 @@ const addNewRide = async (req, res) => {
     console.log(req.query)
     //only find rides address that starts with
     const totalCount = await Rides.find()
-    let data
-    if(req.query.id){
-      data = await Rides.find({status: req.query.status, userId:req.query.id}).skip((req.query.page-1 )* 5).limit(5)
-    }else{
-      data = await Rides.find({status: req.query.status}).skip((req.query.page-1 )* 5).limit(5)
-    }
+    let data = await Rides.find()
+console.log(data)
   
     if(data && totalCount){
     res.json({
@@ -36,9 +32,18 @@ const addNewRide = async (req, res) => {
     }
    }
   
+   const deleteRidesById=async (req, res) => {
+    const rideList = await Rides.findByIdAndDelete(req.body.id)
+    if(rideList){
+    res.json({
+      rideList: rideList
+    })
+    }
+   }
 
   module.exports = {
     addNewRide,
     getAllRides,
-    getRidesById
+    getRidesById,
+    deleteRidesById
     }

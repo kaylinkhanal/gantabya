@@ -6,41 +6,20 @@ import Card from '../../components/Card'
 import { Pagination } from 'antd';
 import { io } from 'socket.io-client';
 const socket = io('http://localhost:4000/');
+export const getServerSideProps = async () => {
+  const res = await fetch('http://localhost:4000/rides')
+  const data = await res.json()
+  console.log(data)
+  debugger;
+  return { props: { data } }
+}
+  
 
-const Home = ()=> { 
-  const {id} = useSelector(state=>state.user)
-  const [ridesList, setRideList] = useState([])
-  const [totalPage, setTotalPage] = useState(0)
-  const fetchRides = async(page=1, searchText)=>{
-      const res = await fetch(`http://localhost:4000/rides?status=pending&page=${page}&searchText=${searchText}&id=${id}`)
-      const data= await res.json()
-      if(data){
-        setRideList(data.ridesList)
-        setTotalPage(data.totalCount)
-      }
-  }
-  useEffect(()=>{
-    fetchRides()
-  },[])
-
-  useEffect(()=>{
-    socket.on('rideRequest', (rideList)=>{
-      setRideList(rideList)
-    })
-  })
-  const searchNewList =(e)=>{
-    fetchRides(1, e.target.value)
-  }
-  const {role} =useSelector(state=> state.user)
+const Home = (props)=> { 
+    console.log(props)
     return (
         <div style={{textAlign:'center'}}>
-          <h1>Rides History</h1>
-         <input placeholder="search rides" onChange={searchNewList}/>
-          
-          {ridesList.length> 0 ? ridesList.map((item)=>{
-            return( <Card item={item}/>)
-          }) : <Skeleton />}
-          <Pagination defaultCurrent={0}   total={totalPage} pageSize={5} onChange={(page)=>fetchRides(page)}/>
+      hi
        
       </div>
     )

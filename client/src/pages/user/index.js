@@ -19,6 +19,9 @@ const Home = ()=> {
 
   const {role,id} =useSelector(state=> state.user)
   const inputRef = useRef(null)
+  const inputRef2 = useRef(null)
+
+  
   const {pickUpCoords, pickUpAddress, destinationCoords, destinationAddress} =useSelector(state=> state.location)
 
   const [pickupInputField, setPickUpInputField] = useState('')
@@ -78,6 +81,11 @@ const Home = ()=> {
 
   const selectLocation = ()=>{ 
     dispatch(setPickUpAddr(inputRef?.current.value))
+  }
+
+
+  const selectLocationDest = ()=>{ 
+    dispatch(setDestinationAddr(inputRef2?.current.value))
   }
 
   const assignDestinationLocation = (val)=> {
@@ -151,12 +159,12 @@ const Home = ()=> {
               </Autocomplete>
 
               <Autocomplete //Desitnation Address autocomplete
-               key={1}
-               onPlaceChanged= {(val)=> selectLocation()}
+               key={2}
+               onPlaceChanged= {(val)=> selectLocationDest()}
               >
              <input 
                 value={destinationAddress}
-                ref={inputRef}
+                ref={inputRef2}
                 placeholder="Enter your gantabya" onChange={(e)=> dispatch(setDestinationAddr(e.target.value))}
                 />
               </Autocomplete>
@@ -168,6 +176,7 @@ Send pickup request
                 center={center}
                 zoom={14}
               >
+                <div style={{backgroundColor:'red', position:'absolute'}}></div>
                   <MarkerF
                     onLoad={onLoad}
                     onDragEnd= {assignPickUpLocation}
