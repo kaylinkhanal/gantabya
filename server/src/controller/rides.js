@@ -22,7 +22,7 @@ const addNewRide = async (req, res) => {
     if(data && totalCount){
     res.json({
       ridesList:data,
-      totalCount: totalCount
+      Count: totalCount
     })
   }
    }

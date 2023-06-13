@@ -6,6 +6,9 @@ import {setPickUpCoords, setPickUpAddr} from '../../redux/reducerSlice/locationS
 import { getDistance } from 'geolib';
 import { io } from 'socket.io-client';
 import priceMap from '../../config/priceMap.json'
+import { FaCar, FaMapMarkerAlt } from "react-icons/fa";
+import { RiMotorbikeFill } from "react-icons/ri";
+
 const socket = io('http://localhost:4000/');
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
 const Home = ()=> {
@@ -122,19 +125,21 @@ const Home = ()=> {
   
     return (
         <div style={{textAlign:'center'}}>
-          price is <button onClick={()=>setPrice(price+1)}>+</button>{price}<button onClick={reducePrice}>-</button>
-          distance is {distance}
+         Set your price: <button onClick={()=>setPrice(price+1)}>+</button>{price}<button onClick={reducePrice}>-</button>
+           The total distance of your travel is: {distance}
+           <br/>
+           
           <button onClick={()=>setRideType('car')}
             style={{background: rideType=='car' ? 'blue' : null}}
-          >Car</button>
+          ><FaCar/></button>
           <button onClick={()=>setRideType('bike')}
-             style={{background: rideType=='bike' ? 'blue' : null}}
-          >Bike</button>
+             style={{background: rideType=='bike' ? 'red' : null}}
+          ><RiMotorbikeFill/></button>
 
           {isLoaded ? (
               <div>
                
-              <Autocomplete
+              <Autocomplete  //PickupAddress auto complete
                key={1}
                onPlaceChanged= {(val)=> selectLocation()}
               >
@@ -144,9 +149,20 @@ const Home = ()=> {
                 placeholder="enter pick up location" onChange={(e)=> dispatch(setPickUpAddr(e.target.value))}
                 />
               </Autocomplete>
-              <button onClick={sendPickupRequest}>
-                Send pickup request
-                </button>
+
+              <Autocomplete //Desitnation Address autocomplete
+               key={1}
+               onPlaceChanged= {(val)=> selectLocation()}
+              >
+             <input 
+                value={destinationAddress}
+                ref={inputRef}
+                placeholder="Enter your gantabya" onChange={(e)=> dispatch(setDestinationAddr(e.target.value))}
+                />
+              </Autocomplete>
+              <button onClick={sendPickupRequest}>        
+Send pickup request
+</button>
               <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -161,14 +177,16 @@ const Home = ()=> {
                      
                      
                      
-                     <MarkerF
+                     <MarkerF // destination marker
                      onLoad={onLoad}
                      draggable= {true}
                      onDragEnd={assignDestinationLocation}
                      position={destinationCoords}
+                     
                       icon={{
-                    path:"M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
-                     fillColor: "green",
+                    //path:"M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
+                    url: require('../../assets/marker.png'),
+                    fillColor: "green",
                     fillOpacity: 0.9,
                       scale: 2,
                        strokeColor: "gold",
