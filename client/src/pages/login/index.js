@@ -19,11 +19,11 @@ const SigninSchema = Yup.object({
   phoneNumber: Yup.number()
     .typeError('must be a number')
     .test('checkLength', 'the number should exactly be 10 digits', val => val.toString().length == 10)
-    .required('Required'),
+    .required('required'),
   password: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
-    .required('Required'),
+    .required('required'),
 });
 const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -70,7 +70,9 @@ const Login = () => {
     <>
       <Navbar />
       <div className={styles.container}>
-        <Image src={cover} alt="no image" className={styles.image} />
+        <div className={styles.imageContainer}>
+          <Image src={cover} alt="no image" className={styles.image} />
+        </div>
         <div className={styles.formContainer}>
           <Formik
             initialValues={initialValues}
@@ -83,7 +85,6 @@ const Login = () => {
                 <div>
                   <strong className={styles.title}>Login</strong>
                 </div>
-                <hr />
                 <div>
                   <div className={styles.input}>
                     <Field
@@ -95,33 +96,29 @@ const Login = () => {
                     <ErrorMessage name="phoneNumber" component="div" className={styles.errorMessage} />
                   </div>
 
-
-                  <div className={styles.container}>
-                    <div className={styles.input}>
-                      <Field
-                        as={Input.Password}
-                        placeholder="Password"
-                        name="password"
-                        size="large"
-                        iconRender={visible =>
-                          visible ? (
-                            <EyeOutlined onClick={handleTogglePassword} />
-                          ) : (
-                            <EyeInvisibleOutlined onClick={handleTogglePassword} />
-                          )
-                        }
-                      />
-                      <ErrorMessage name="password" component="div" className={styles.errorMessage} />
-                    </div>
+                  <div className={styles.input}>
+                    <Field
+                      as={Input.Password}
+                      placeholder="Password"
+                      name="password"
+                      size="large"
+                      iconRender={visible =>
+                        visible ? (
+                          <EyeOutlined onClick={handleTogglePassword} />
+                        ) : (
+                          <EyeInvisibleOutlined onClick={handleTogglePassword} />
+                        )
+                      }
+                    />
+                    <ErrorMessage name="password" component="div" className={styles.errorMessage} />
                   </div>
 
                   <div className={styles.input}>
                     <Button size='large' htmlType='submit' className={styles.buttonLogin}>Login</Button>
                   </div>
-                  <div>
-                    <h1 className={styles.subtitle}>Get in the driver’s <br /> seat and get paid</h1>
-                    <p>Drive on the platform with the largest network of active riders.</p>
-                  </div>
+                  <br />
+                  <hr />
+                  <br />
                   <div>
                     <Space wrap>
                       <Button size="large" className={styles.buttonSignup} onClick={handleCreateClick}>Sign up to drive</Button>
@@ -136,12 +133,6 @@ const Login = () => {
         </div>
       </div >
 
-      <div className={styles.footer}>
-        <div className={styles.footerContent}>
-          <h1>The Gantabya you know, reimagined for business</h1>
-          <p>A platform for managing global rides and meals, and local deliveries, for companies of any size.</p>
-        </div>
-      </div>
 
     </>
 
