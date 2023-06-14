@@ -9,18 +9,17 @@ const socket = io('http://localhost:4000/');
 export const getServerSideProps = async () => {
   const res = await fetch('http://localhost:4000/rides')
   const data = await res.json()
-  console.log(data)
-  debugger;
   return { props: { data } }
 }
   
 
 const Home = (props)=> { 
-    console.log(props)
+  console.log(props.data.ridesList)
     return (
         <div style={{textAlign:'center'}}>
-      hi
-       
+          {props.data.ridesList.map((item)=>{
+            return (<li>{item.pickUpAddress}</li>)
+          })}
       </div>
     )
 }

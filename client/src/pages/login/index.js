@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUserDetails } from '../../redux/reducerSlice/userSlice'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
+import axios from 'axios';
 import { useRouter } from "next/router";
 import { Button, message, Space, Input } from 'antd';
 import styles from './Login.module.css';
@@ -36,18 +37,10 @@ const Login = () => {
   const { token } = useSelector(state => state.user)
 
   const handleLogin = async (values) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phoneNumber: values.phoneNumber, password: values.password })
-    };
     try {
-      const res = await fetch('http://localhost:4000/login', requestOptions)
-      const data = await res.json()
-
-      if (data.success) {
-
-        dispatch(setUserDetails(data))
+      const res = await axios.post('/api/login',{ phoneNumber: values.phoneNumber, password: values.password } )
+      if (res.data.data.success) {
+        dispatch(setUserDetails(res.data.data))
       } else {
         message.error("login failed, try again");
       }
