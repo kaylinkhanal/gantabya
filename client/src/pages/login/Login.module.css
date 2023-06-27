@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.image {}
+
+.form {
+    width: 360px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 34px;
+}
+
+.input {
+    margin-top: 15px;
+}
+
+.buttonLogin {
+    width: 100%;
+}
+
+.buttonSignup {
+    background-color: black !important;
+    color: white !important;
+    width: 100%;
+}
+
+.errorMessage {
+    color: red;
+}

@@ -1,0 +1,113 @@
+.Home_form {
+  width: 360px;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  margin-top: 50px;
+}
+
+
+.Home_button {
+  background-color: #0070f3;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.toggleContainer span {
+  margin-right: 10px;
+}
+
+.formTitle {
+  font-size: 28px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.formLabel {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.switch_user {
+  padding-bottom: 20px;
+}
+
+.ant-switch-checked:hover {
+  background-color: purple;
+  border: 2px solid orange;
+  border-radius: 4px;
+}
+
+.submitButton {
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: black;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: rgb(59, 58, 58);
+  color: white !important;
+}
+
+
+.switch_user {
+  font-size: 22px;
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.switch_user>div {
+  display: flex;
+  align-items: center;
+}
+
+.switch_user span {
+  margin: 0 10px;
+}
+
+
+.Home_select {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.required {
+  font-size: 13px;
+  color: red;
+}
+
+.Home_input {
+  margin-top: 15px;
+}
+
+.switchRider {
+  margin-top: 10px;
+}
+
+.filebtn {
+  margin-top: 20px;
+}

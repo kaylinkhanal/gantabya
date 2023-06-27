@@ -1,0 +1,23 @@
+{
+    "admin": {
+        "navItem": [
+            {"label": "Home", "link": "/"},
+            {"label": "Profile", "link": "/profile"},
+            {"label": "User Management", "link": "/user"}
+             ]
+    },
+    "user": {
+        "navItem": [
+        {"label": "Home", "link": "/"},
+        {"label": "Profile", "link": "/profil"},
+        {"label": "Rides", "link": "/rides"}
+        ]
+    },
+    "rider": {
+        "navItem": [
+        {"label": "Home", "link": "/"},
+        {"label": "Profile", "link": "/"},
+        {"label": "Earnings", "link": "/"}
+        ]
+    }
+}
