@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 import {useEffect, useState} from 'react';
 import { Col, Row } from 'antd';
 import { io } from 'socket.io-client';
+import { useSelector } from 'react-redux';
 const socket = io('http://localhost:4000/');
 export default function Page() {
+  const {token } = useSelector(state=>state.user)
   const router = useRouter();
   const [rideDetails, setRideDetails] = useState({})
   useEffect(()=>{
@@ -13,7 +15,9 @@ export default function Page() {
   const fetchRidesDetails = async() => {
     try{
       if(router.query?.id){
-        const res= await fetch('http://localhost:4000/rides/'+router.query.id)
+      
+        const headers = { 'Authorization': 'Bearer '+token ,"Content-Type": "application/json",};
+        const res= await fetch('http://localhost:4000/rides/'+router.query.id, {headers})
         const data=  await res.json()
         if(data){
          setRideDetails(data.rideList)
