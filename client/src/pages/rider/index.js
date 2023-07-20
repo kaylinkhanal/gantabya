@@ -40,7 +40,7 @@ const Home = ()=> {
         <div style={{textAlign:'center'}}>
          <input placeholder="search rides" onChange={searchNewList}/>
           
-          {ridesList.length> 0 ? ridesList.map((item)=>{
+          {ridesList?.length> 0 ? ridesList.map((item)=>{
             return( <Card item={item} fetchRides={fetchRides}/>)
           }) : <Skeleton />}
           <Pagination defaultCurrent={1}   total={totalPage} pageSize={5} onChange={(page)=>fetchRides(page)}/>
