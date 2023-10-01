@@ -82,6 +82,12 @@ Auth
     - [x] Get user details after ride is accepted.
 
 
+
+- [ ] Documentation
+
+ -[x] Charts and diagrams : https://docs.google.com/document/d/1W_TsjLPA7gcvrZ3V4572U2BQAXKoSWOT/edit#heading=h.gjdgxs
+ -[x] Appendixs: https://docs.google.com/document/d/1Sx6RzDQwGrUV31QNtkjge-IpfPwOehWA/edit
+ 
     
 
 
