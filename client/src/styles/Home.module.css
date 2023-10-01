@@ -283,3 +283,24 @@ filter:saturate(55%);
     left: 90%;
     top: -35px;
 }
+
+.navbar-center{
+  position: relative;
+}
+.profile{
+  position: relative;
+  border-radius: 50%;
+  top: -17px;
+  max-height: 69px;
+  max-width: 78px;
+  left: -2px;
+}
+
+.welcome{
+
+}
+
+.backgroundrider{
+  background-color: tan;
+  
+}

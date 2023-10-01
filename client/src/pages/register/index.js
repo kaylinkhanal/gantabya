@@ -82,7 +82,7 @@ const Register = () => {
     try {
       const res = await fetch("http://localhost:4000/register", requestOptions);
       const data = await res.json()
-      console.log(data)
+     
       if (res && data.success) {
         message.success(data.msg);
         router.push('/')

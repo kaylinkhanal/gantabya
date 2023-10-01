@@ -33,10 +33,12 @@ io.on("connection", (socket) => {
 
   socket.on('changeRideStatus', async (changeRideStatusID)=>{
    
-    const res = await Rides.findByIdAndUpdate(changeRideStatusID,{status:'success'})
+    const res = await Rides.findByIdAndUpdate(changeRideStatusID,{status:'Occupied'})
     if(res){
       const ridesList = await Rides.find()
       io.emit('rideRequest', ridesList)
+
+      
     }
   })
   

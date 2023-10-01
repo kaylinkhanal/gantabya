@@ -31,7 +31,7 @@ Auth
 - [ ] Login 
     - [x] frontend form validation
     - [x] backend validation
-    - [ ] password hash
+    - [x] password hash
 - [ ] Register
     - [x] password hash
 - [ ] Change Password
@@ -56,6 +56,9 @@ Auth
     - [x] added web tokens
     - [x] accessed from login dashboard
     - [x] Remove Rides
+    - [x] View Rider List
+    - [x] Accept Rider join request
+    - [x] Reject Rider request
 
  - [ ] Admin Dashboard
      - [x] Only accessed after being logged in as admin

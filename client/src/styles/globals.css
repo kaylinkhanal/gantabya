@@ -12,9 +12,15 @@ body {
    width:100%; 
 }
 
+.navbar-center{
+    position: relative;
+    top: -64px;
+}
+
 .logo {
     font-size: 30px;
     margin-left: 300px;
     color: inherit;
     text-decoration: none;
 }
+

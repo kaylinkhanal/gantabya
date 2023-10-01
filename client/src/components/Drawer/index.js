@@ -5,7 +5,7 @@ import navItems from '../../config/navItems.json'
 import { Avatar, List } from 'antd';
 import { logout,setToken,setRole } from '../../redux/reducerSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
+import styles from '@/styles/Home.module.css'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import Image from 'next/image';
@@ -68,11 +68,16 @@ const CustomDrawer = (props) => {
       {/* Your other navbar contents */}
                   
       <div className="navbar-center"  >
+        
         <Dropdown overlay={menu} placement="bottomRight">
-            <Image src={'http://localhost:4000/avatar/'+id} width={100} height={100} alt="avatar"/>
+          
+            <Image className={styles.profile}src={'http://localhost:4000/avatar/'+id} width={100} height={100} alt="avatar"/>
           {/* <Button shape="circle" size='large' icon={<UserOutlined />} /> */}
+         
         </Dropdown>
-        Hello <b>{role} </b>
+        <div className={styles.welcome}>
+        Welcome <b>{role} </b>
+        </div>
       </div>
     </header>
         }

@@ -11,6 +11,7 @@ import { RiMotorbikeFill } from "react-icons/ri";
 
 const socket = io('http://localhost:4000/');
 import {setDestinationCoords, setDestinationAddr} from '../../redux/reducerSlice/locationSlice'
+import { message } from 'antd';
 const Home = ()=> {
   const dispatch = useDispatch()
   const [rideType, setRideType] = useState('bike')
@@ -44,7 +45,8 @@ const Home = ()=> {
 
   const { isLoaded, loadError } = useJsApiLoader({
     libraries: ['places'],
-    googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0" 
+    //googleMapsApiKey: "AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0" 
+    googleMapsApiKey:"AIzaSyDLfjmFgDEt9_G2LXVyP61MZtVHE2M3H-0"
   })
 
   const containerStyle = {
@@ -120,7 +122,7 @@ const Home = ()=> {
       const res = await fetch('http://localhost:4000/rides', requestOptions)
       const data = await res.json()
       if(data){
-        alert("your pickup request is submitted")
+        message.success("Your pickup request has been submitted Please wait or the Rider to call u!")
       }
   }catch(err){
     alert("sth went wrong")
@@ -134,7 +136,7 @@ const Home = ()=> {
     return (
         <div style={{textAlign:'center'}}>
          Set your price: <button onClick={()=>setPrice(price+1)}>+</button>{price}<button onClick={reducePrice}>-</button>
-           The total distance of your travel is: {distance}
+           The total distance of your travel is: {distance}km
            <br/>
            
           <button onClick={()=>setRideType('car')}

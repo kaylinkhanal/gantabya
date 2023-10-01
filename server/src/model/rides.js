@@ -14,7 +14,7 @@ const ridesSchema = new mongoose.Schema({
   riderId: String,
   price: Number,
   distance: String,
-  status: {type: String, default: 'pending'}
+  status: {type: String, default: 'PENDING'}
   },
   { timestamps: true }
   );

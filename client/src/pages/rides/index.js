@@ -14,14 +14,19 @@ export const getServerSideProps = async () => {
   
 
 const Home = (props)=> { 
-  console.log(props.data.ridesList)
+
     return (
-        <div style={{textAlign:'center'}}>
+      <div style={{textAlign:'center'}}>
+      <div> <h1> Previous Destinations</h1>
+        
           {props.data.ridesList.map((item)=>{
             return (<li>{item.pickUpAddress}</li>)
           })}
       </div>
+      </div>
     )
 }
+
+
 
 export default Home

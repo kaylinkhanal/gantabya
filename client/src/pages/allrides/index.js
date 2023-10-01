@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 //getServerSideProps => fetches again on every new page request
@@ -17,7 +18,8 @@ function AllRides(props) {
     //useEffect
   return (
     <div>{props.data.ridesList.map((item)=>{
-        return <li>{item.destinationAddress}</li>
+        return <div>
+           <h1> Previous destinations</h1> <li>{item.destinationAddress}</li> </div>
     })}</div>
   )
 }
