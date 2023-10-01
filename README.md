@@ -44,7 +44,7 @@ Auth
 
 
     - [ ] Logout
-           - [x] Ending session on logout
+        - [x] Ending session on logout
 
 - [ ] Register
     - [x] password hash from bcrypt
