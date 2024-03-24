@@ -24,7 +24,7 @@ const Home = () => {
     setUserList(updatedUserList);
   
   };
-c
+
   const handleAccept = (user) => {
     // Display a success message
     message.success(`Rider's permission has been accepted for ${user.fullName}`);
